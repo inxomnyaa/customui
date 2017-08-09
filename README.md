@@ -1,7 +1,7 @@
 # customui
 Library to create custom UI's in MCPE 1.2+
 
-Inspired, but not copy-pasted from Hydreon/Steadfast2.
+Inspired by Hydreon/Steadfast2.
 
 # Lets you:
 - Create custom UI's
@@ -12,3 +12,4 @@ Inspired, but not copy-pasted from Hydreon/Steadfast2.
 
 # TODO:
 - [ ] Everything
+- [ ] Rewrite Everything to not-messed-up Steadfast code
