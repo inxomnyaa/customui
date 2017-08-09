@@ -5,8 +5,8 @@ namespace xenialdan\customui\windows;
 use pocketmine\Player;
 use xenialdan\customui\CustomUI;
 
-abstract class ModalWindow implements CustomUI {
-	
+abstract class ModalWindow implements CustomUI{
+
 	/** @var string */
 	protected $title = '';
 	/** @var string */
@@ -17,15 +17,15 @@ abstract class ModalWindow implements CustomUI {
 	protected $falseButtonText = '';
 	/** @var string */
 	protected $json = '';
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $title
 	 * @param string $content
 	 * @param string $trueButtonText
 	 * @param string $falseButtonText
 	 */
-	public function __construct($title, $content, $trueButtonText, $falseButtonText) {
+	public function __construct($title, $content, $trueButtonText, $falseButtonText){
 		$this->title = $title;
 		$this->content = $content;
 		$this->trueButtonText = $trueButtonText;
@@ -34,11 +34,11 @@ abstract class ModalWindow implements CustomUI {
 
 	/**
 	 * Convert class to JSON string
-	 * 
+	 *
 	 * @return string
 	 */
-	final public function toJSON() {
-		if ($this->json != '') {
+	final public function toJSON(){
+		if ($this->json != ''){
 			return $this->json;
 		}
 		return $this->json = json_encode([
@@ -54,9 +54,9 @@ abstract class ModalWindow implements CustomUI {
 	 * To handle manual closing
 	 * @param Player $player
 	 */
-	public function close(Player $player) {
+	public function close(Player $player){
 	}
-	
+
 	/**
 	 * @param boolean $response
 	 * @param Player $player

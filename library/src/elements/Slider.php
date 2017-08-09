@@ -1,13 +1,13 @@
 <?php
 
-namespace xenialdan\customui\elements\customForm;
+namespace xenialdan\customui\elements;
 
 use Exception;
 use pocketmine\Player;
 use xenialdan\customui\elements\UIElement;
 
-class Slider extends UIElement {
-	
+class Slider extends UIElement{
+
 	/** @var float */
 	protected $min = 0;
 	/** @var float */
@@ -16,17 +16,17 @@ class Slider extends UIElement {
 	protected $step = 0;
 	/** @var float */
 	protected $defaultValue = 0;
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $text
 	 * @param float $min
 	 * @param float $max
 	 * @param float $step
 	 * @throws Exception
 	 */
-	public function __construct($text, $min, $max, $step = 0.0) {
-		if ($min > $max) {
+	public function __construct($text, $min, $max, $step = 0.0){
+		if ($min > $max){
 			throw new \Exception(__METHOD__ . ' Borders are messed up');
 		}
 		$this->text = $text;
@@ -35,53 +35,53 @@ class Slider extends UIElement {
 		$this->defaultValue = $min;
 		$this->setStep($step);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param float $step
 	 * @throws Exception
 	 */
-	public function setStep($step) {
-		if ($step < 0) {
+	public function setStep($step){
+		if ($step < 0){
 			throw new \Exception(__METHOD__ . ' Step should be positive');
 		}
 		$this->step = $step;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param float $value
 	 * @throws Exception
 	 */
-	public function setDefaultValue($value) {
-		if ($value < $this->min || $value > $this->max) {
+	public function setDefaultValue($value){
+		if ($value < $this->min || $value > $this->max){
 			throw new \Exception(__METHOD__ . ' Default value out of borders');
 		}
 		$this->defaultValue = $value;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return array
 	 */
-	final public function getDataToJson() {
+	final public function getDataToJson(){
 		$data = [
 			"type" => "slider",
 			"text" => $this->text,
 			"min" => $this->min,
 			"max" => $this->max
 		];
-		if ($this->step > 0) {
+		if ($this->step > 0){
 			$data["step"] = $this->step;
 		}
-		if ($this->defaultValue != $this->min) {
+		if ($this->defaultValue != $this->min){
 			$data["default"] = $this->defaultValue;
 		}
 		return $data;
 	}
 
-	public function handle($value, Player $player) {
-		
+	public function handle($value, Player $player){
+
 	}
 
 }

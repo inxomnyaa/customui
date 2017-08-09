@@ -4,10 +4,10 @@ namespace xenialdan\customui;
 
 use pocketmine\Player;
 
-interface CustomUI {
+interface CustomUI{
 
 	public function handle($response, Player $player);
-	
+
 	public function toJSON();
 
 	/**

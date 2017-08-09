@@ -6,18 +6,18 @@ use pocketmine\Player;
 use xenialdan\customui\CustomUI;
 use xenialdan\customui\elements\UIElement;
 
-class CustomForm implements CustomUI {
-	
+class CustomForm implements CustomUI{
+
 	/** @var string */
 	protected $title = '';
 	/** @var UIElement[] */
 	protected $elements = [];
 	/** @var string */
 	protected $json = '';
-	/** @var string Only for server settings*/
+	/** @var string Only for server settings */
 	protected $iconURL = '';
-	
-	public function __construct($title) {
+
+	public function __construct($title){
 		$this->title = $title;
 	}
 
@@ -25,21 +25,21 @@ class CustomForm implements CustomUI {
 	 * Add element to form
 	 * @param UIElement $element
 	 */
-	public function addElement(UIElement $element) {
+	public function addElement(UIElement $element){
 		$this->elements[] = $element;
 		$this->json = '';
 	}
-	
+
 	/**
 	 * Only for server settings
 	 * @param string $url
 	 */
-	public function addIconUrl($url) {
+	public function addIconUrl($url){
 		$this->iconURL = $url;
 	}
-	
-	final public function toJSON() {
-		if ($this->json != '') {
+
+	final public function toJSON(){
+		if ($this->json != ''){
 			return $this->json;
 		}
 		$data = [
@@ -47,14 +47,14 @@ class CustomForm implements CustomUI {
 			'title' => $this->title,
 			'content' => []
 		];
-		if ($this->iconURL != '') {
+		if ($this->iconURL != ''){
 			$data['icon'] = [
 				"type" => "url",
 				"data" => $this->iconURL
 			];
 		}
-		foreach ($this->elements as $element) {
-			$data['content'][] = $element->getDataToJson();
+		foreach ($this->elements as $element){
+			$data['content'][] = $element->getData();
 		}
 		return $this->json = json_encode($data);
 	}
@@ -63,21 +63,21 @@ class CustomForm implements CustomUI {
 	 * To handle manual closing
 	 * @param Player $player
 	 */
-	public function close(Player $player) {
+	public function close(Player $player){
 	}
-	
+
 	/**
-	 * @notice It not final because some logic may 
+	 * @notice It not final because some logic may
 	 * depends on some elements at the same time
-	 * 
+	 *
 	 * @param array $response
 	 * @param Player $player
 	 */
-	public function handle($response, Player $player) {
-		foreach ($response as $elementKey => $elementValue) {
-			if (isset($this->elements[$elementKey])) {
+	public function handle($response, Player $player){
+		foreach ($response as $elementKey => $elementValue){
+			if (isset($this->elements[$elementKey])){
 				$this->elements[$elementKey]->handle($elementValue, $player);
-			} else {
+			} else{
 				error_log(__CLASS__ . '::' . __METHOD__ . " Element with index {$elementKey} doesn't exists.");
 			}
 		}
