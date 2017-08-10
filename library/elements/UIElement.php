@@ -13,7 +13,7 @@ abstract class UIElement implements \JsonSerializable{
 	 *
 	 * @return array
 	 */
-	final public function jsonSerialize(){
+	public function jsonSerialize(){
 		return [];
 	}
 

@@ -15,10 +15,9 @@ abstract class ModalWindow implements CustomUI{
 	protected $trueButtonText = '';
 	/** @var string */
 	protected $falseButtonText = '';
-	/** @var string */
-	protected $json = '';
 
 	/**
+	 * This is a window to show a simple text to the player
 	 *
 	 * @param string $title
 	 * @param string $content
@@ -32,22 +31,14 @@ abstract class ModalWindow implements CustomUI{
 		$this->falseButtonText = $falseButtonText;
 	}
 
-	/**
-	 * Convert class to JSON string
-	 *
-	 * @return string
-	 */
-	final public function toJSON(){
-		if ($this->json != ''){
-			return $this->json;
-		}
-		return $this->json = json_encode([
+	final public function jsonSerialize(){
+		return [
 			'type' => 'modal',
 			'title' => $this->title,
 			'content' => $this->content,
 			'button1' => $this->trueButtonText,
 			'button2' => $this->falseButtonText,
-		]);
+		];
 	}
 
 	/**

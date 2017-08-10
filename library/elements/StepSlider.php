@@ -3,7 +3,6 @@
 namespace xenialdan\customui\elements;
 
 use pocketmine\Player;
-use xenialdan\customui\elements\UIElement;
 
 class StepSlider extends UIElement{
 
@@ -11,7 +10,6 @@ class StepSlider extends UIElement{
 	protected $steps = [];
 	/** @var integer Step index */
 	protected $defaultStepIndex = 0;
-	private $options = [];
 
 	/**
 	 *
@@ -55,14 +53,14 @@ class StepSlider extends UIElement{
 	 * @param string[] $steps
 	 */
 	public function setSteps($steps){
-		$this->options = $steps;
+		$this->steps = $steps;
 	}
 
 	/**
 	 *
 	 * @return array
 	 */
-	final public function getDataToJson(){
+	final public function jsonSerialize(){
 		return [
 			'type' => 'step_slider',
 			'text' => $this->text,

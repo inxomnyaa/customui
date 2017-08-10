@@ -3,7 +3,6 @@
 namespace xenialdan\customui\elements;
 
 use pocketmine\Player;
-use xenialdan\customui\elements\UIElement;
 
 class Label extends UIElement{
 
@@ -19,7 +18,7 @@ class Label extends UIElement{
 	 *
 	 * @return array
 	 */
-	final public function getDataToJson(){
+	final public function jsonSerialize(){
 		return [
 			"type" => "label",
 			"text" => $this->text

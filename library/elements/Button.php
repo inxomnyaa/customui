@@ -30,7 +30,7 @@ abstract class Button extends UIElement{
 	 * @param string $imagePath
 	 * @throws Exception
 	 */
-	public function addImage($imageType, $imagePath){
+	public function addImage(string $imageType, string $imagePath){
 		if ($imageType != self::IMAGE_TYPE_PATH && $imageType != self::IMAGE_TYPE_URL){
 			throw new Exception(__CLASS__ . '::' . __METHOD__ . ' Invalid image type');
 		}
@@ -43,7 +43,7 @@ abstract class Button extends UIElement{
 	 *
 	 * @return array
 	 */
-	final public function getData(){
+	final public function jsonSerialize(){
 		$data = ['text' => $this->text];
 		if ($this->imageType != ''){
 			$data['image'] = [

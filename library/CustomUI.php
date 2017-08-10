@@ -8,7 +8,7 @@ interface CustomUI{
 
 	public function handle($response, Player $player);
 
-	public function toJSON();
+	public function jsonSerialize();
 
 	/**
 	 * To handle manual closing

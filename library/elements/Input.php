@@ -3,7 +3,6 @@
 namespace xenialdan\customui\elements;
 
 use pocketmine\Player;
-use xenialdan\customui\elements\UIElement;
 
 class Input extends UIElement{
 
@@ -28,7 +27,7 @@ class Input extends UIElement{
 	 *
 	 * @return array
 	 */
-	final public function getDataToJson(){
+	final public function jsonSerialize(){
 		return [
 			"type" => "input",
 			"text" => $this->text,

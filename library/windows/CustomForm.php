@@ -12,11 +12,13 @@ class CustomForm implements CustomUI{
 	protected $title = '';
 	/** @var UIElement[] */
 	protected $elements = [];
-	/** @var string */
-	protected $json = '';
 	/** @var string Only for server settings */
 	protected $iconURL = '';
 
+	/**
+	 * CustomForm is a totally custom and dynamic form
+	 * @param $title
+	 */
 	public function __construct($title){
 		$this->title = $title;
 	}
@@ -27,7 +29,6 @@ class CustomForm implements CustomUI{
 	 */
 	public function addElement(UIElement $element){
 		$this->elements[] = $element;
-		$this->json = '';
 	}
 
 	/**
@@ -38,10 +39,7 @@ class CustomForm implements CustomUI{
 		$this->iconURL = $url;
 	}
 
-	final public function toJSON(){
-		if ($this->json != ''){
-			return $this->json;
-		}
+	final public function jsonSerialize(){
 		$data = [
 			'type' => 'custom_form',
 			'title' => $this->title,
@@ -54,9 +52,9 @@ class CustomForm implements CustomUI{
 			];
 		}
 		foreach ($this->elements as $element){
-			$data['content'][] = $element->getData();
+			$data['content'][] = $element;//TODO: test serialization of class
 		}
-		return $this->json = json_encode($data);
+		return $data;
 	}
 
 	/**

@@ -3,7 +3,6 @@
 namespace xenialdan\customui\elements;
 
 use pocketmine\Player;
-use xenialdan\customui\elements\UIElement;
 
 class Dropdown extends UIElement{
 
@@ -61,7 +60,7 @@ class Dropdown extends UIElement{
 	 *
 	 * @return array
 	 */
-	final public function getDataToJson(){
+	final public function jsonSerialize(){
 		return [
 			'type' => 'dropdown',
 			'text' => $this->text,

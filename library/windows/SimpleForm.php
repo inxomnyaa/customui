@@ -5,7 +5,7 @@ namespace xenialdan\customui\windows;
 use Exception;
 use pocketmine\Player;
 use xenialdan\customui\CustomUI;
-use xenialdan\customui\elements\simpleForm\Button;
+use xenialdan\customui\elements\Button;
 
 class SimpleForm implements CustomUI{
 
@@ -19,6 +19,7 @@ class SimpleForm implements CustomUI{
 	protected $json = '';
 
 	/**
+	 * SimpleForm only consists of clickable buttons
 	 *
 	 * @param string $title
 	 * @param string $content
@@ -38,12 +39,7 @@ class SimpleForm implements CustomUI{
 		$this->json = '';
 	}
 
-	/**
-	 * Convert class to JSON string
-	 *
-	 * @return string
-	 */
-	final public function toJSON(){//serialize
+	final public function jsonSerialize(){
 		if ($this->json != ''){
 			return $this->json;
 		}
@@ -54,9 +50,9 @@ class SimpleForm implements CustomUI{
 			'buttons' => []
 		];
 		foreach ($this->buttons as $button){
-			$data['buttons'][] = $button->getDataToJson();
+			$data['buttons'][] = $button;//TODO: test serializaion of class
 		}
-		return $this->json = json_encode($data);
+		return $data;
 	}
 
 	/**

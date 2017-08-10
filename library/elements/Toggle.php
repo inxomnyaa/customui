@@ -3,7 +3,6 @@
 namespace xenialdan\customui\elements;
 
 use pocketmine\Player;
-use xenialdan\customui\elements\UIElement;
 
 class Toggle extends UIElement{
 
@@ -21,7 +20,6 @@ class Toggle extends UIElement{
 	}
 
 	/**
-	 *
 	 * @param bool $value
 	 */
 	public function setDefaultValue(bool $value){
@@ -29,10 +27,9 @@ class Toggle extends UIElement{
 	}
 
 	/**
-	 *
 	 * @return array
 	 */
-	final public function getDataToJson(){
+	public function jsonSerialize(){
 		return [
 			"type" => "toggle",
 			"text" => $this->text,
