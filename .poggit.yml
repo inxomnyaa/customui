@@ -9,6 +9,6 @@ projects:
   customuitest:
     path: "example"
     libs:
-      - src: xenialdan/customui/customui
+      - src: XenialDan/customui/customui
         version: "^0.0"
 ...
