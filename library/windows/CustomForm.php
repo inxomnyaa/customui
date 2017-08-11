@@ -6,7 +6,7 @@ use pocketmine\Player;
 use xenialdan\customui\CustomUI;
 use xenialdan\customui\elements\UIElement;
 
-class CustomForm implements CustomUI{
+class CustomForm implements CustomUI, \JsonSerializable{
 
 	/** @var string */
 	protected $title = '';
@@ -72,6 +72,7 @@ class CustomForm implements CustomUI{
 	 * @param Player $player
 	 */
 	public function handle($response, Player $player){
+		print __FILE__ . ': ' . var_dump($response);
 		foreach ($response as $elementKey => $elementValue){
 			if (isset($this->elements[$elementKey])){
 				$this->elements[$elementKey]->handle($elementValue, $player);

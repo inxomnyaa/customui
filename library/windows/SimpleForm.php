@@ -7,7 +7,7 @@ use pocketmine\Player;
 use xenialdan\customui\CustomUI;
 use xenialdan\customui\elements\Button;
 
-class SimpleForm implements CustomUI{
+class SimpleForm implements CustomUI, \JsonSerializable{
 
 	/** @var string */
 	protected $title = '';
@@ -70,6 +70,7 @@ class SimpleForm implements CustomUI{
 	 * @throws Exception
 	 */
 	final public function handle($response, Player $player){
+		print __FILE__ . ': ' . var_dump($response);
 		if (isset($this->buttons[$response])){
 			$this->buttons[$response]->handle(true, $player);
 		} else{

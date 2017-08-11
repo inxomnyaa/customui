@@ -3,8 +3,9 @@
 namespace xenialdan\customui\elements;
 
 use Exception;
+use pocketmine\Player;
 
-abstract class Button extends UIElement{
+class Button extends UIElement{
 
 	const IMAGE_TYPE_PATH = 'path';
 	const IMAGE_TYPE_URL = 'url';
@@ -52,6 +53,10 @@ abstract class Button extends UIElement{
 			];
 		}
 		return $data;
+	}
+
+	public function handle($value, Player $player){
+
 	}
 
 }

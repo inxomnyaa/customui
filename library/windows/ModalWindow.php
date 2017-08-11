@@ -2,10 +2,11 @@
 
 namespace xenialdan\customui\windows;
 
+use Exception;
 use pocketmine\Player;
 use xenialdan\customui\CustomUI;
 
-abstract class ModalWindow implements CustomUI{
+class ModalWindow implements CustomUI, \JsonSerializable{
 
 	/** @var string */
 	protected $title = '';
@@ -49,9 +50,14 @@ abstract class ModalWindow implements CustomUI{
 	}
 
 	/**
-	 * @param boolean $response
+	 *
+	 *
+	 * @param int $response Button index
 	 * @param Player $player
+	 * @throws Exception
 	 */
-	abstract public function handle($response, Player $player);
+	final public function handle($response, Player $player){
+		print __FILE__ . ': ' . var_dump($response);
+	}
 
 }
