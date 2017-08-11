@@ -1,0 +1,14 @@
+Must look like:
+
+- plugin.yml
+- src
+  - xenialdan
+    - customui
+      - elements
+      - network
+      - windows
+      - CustomUI.php
+      - virion.yml
+  - yournamespace
+    - yourprojectname
+      - contentofyourproject

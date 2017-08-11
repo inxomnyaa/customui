@@ -6,4 +6,9 @@ projects:
     path: "library"
     type: library
     model: virion
+  customuitest:
+    path: "example"
+    libs:
+      - src: xenialdan/customui/customui
+        version: "^0.0"
 ...
