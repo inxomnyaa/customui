@@ -12,4 +12,4 @@ Inspired by Hydreon/Steadfast2.
 
 # TODO:
 - [ ] Everything
-- [ ] Rewrite Everything to not-messed-up Steadfast code
+- [x] Rewrite Everything to not-messed-up Steadfast code
