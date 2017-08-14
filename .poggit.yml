@@ -7,8 +7,8 @@ projects:
     type: library
     model: virion
   customuitest:
-    path: "example"
+    path: "customuitest"
     libs:
-      - src: XenialDan/customui/customui
-        version: "^0.0"
+      - src: customui
+        version: "^0.1"
 ...

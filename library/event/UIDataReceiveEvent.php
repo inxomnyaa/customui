@@ -19,34 +19,22 @@
  *
 */
 
-declare(strict_types=1);
+namespace xenialdan\customui\event;
 
-namespace xenialdan\customui\network;
 
-#include <rules/DataPacket.h>
-
-use pocketmine\network\mcpe\NetworkSession;
 use pocketmine\network\mcpe\protocol\DataPacket;
 
-class ServerSettingsResponsePacket extends DataPacket{
-	const NETWORK_ID = ProtocolInfo::SERVER_SETTINGS_RESPONSE_PACKET;
+class UIDataReceiveEvent extends UIEvent{
 
-	/** @var int */
-	public $formId;
-	/** @var string */
-	public $formData; //json
-
-	public function decodePayload(){
-		$this->formId = $this->getUnsignedVarInt();
-		$this->formData = $this->getString();
+	public function __construct(DataPacket $packet){
+		parent::__construct($packet);
 	}
 
-	public function encodePayload(){
-		$this->putUnsignedVarInt($this->formId);
-		$this->putString($this->formData);
+	public function getData() {
+		return json_decode($this->packet->formData);
 	}
 
-	public function handle(NetworkSession $session): bool{
-		return true;
+	public function getDataEncoded() {
+		return $this->packet->formData;
 	}
 }

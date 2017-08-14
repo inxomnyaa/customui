@@ -23,8 +23,7 @@ class ModalFormResponsePacket extends DataPacket{
 	public function encodePayload(){
 	}
 
-	public function handle(NetworkSession $session) : bool{
-		var_dump($this);
+	public function handle(NetworkSession $session): bool{
 		return true;
 	}
 }

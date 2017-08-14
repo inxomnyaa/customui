@@ -64,7 +64,7 @@ class StepSlider extends UIElement{
 		return [
 			'type' => 'step_slider',
 			'text' => $this->text,
-			'steps' => $this->steps,
+			'steps' => array_map('strval', $this->steps),
 			'default' => $this->defaultStepIndex
 		];
 	}

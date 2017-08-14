@@ -45,7 +45,10 @@ class Button extends UIElement{
 	 * @return array
 	 */
 	final public function jsonSerialize(){
-		$data = ['text' => $this->text];
+		$data = [
+			'type' => 'button',
+			'text' => $this->text
+		];
 		if ($this->imageType != ''){
 			$data['image'] = [
 				'type' => $this->imageType,

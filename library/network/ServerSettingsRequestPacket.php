@@ -18,8 +18,7 @@ class ServerSettingsRequestPacket extends DataPacket{
 		//No payload
 	}
 
-	public function handle(NetworkSession $session) : bool{
-		var_dump($this);
+	public function handle(NetworkSession $session): bool{
 		return true;
 	}
 }

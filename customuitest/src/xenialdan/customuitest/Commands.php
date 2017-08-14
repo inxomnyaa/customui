@@ -10,6 +10,7 @@ use pocketmine\utils\TextFormat;
 use xenialdan\customuitest\subcommand\SubCommand;
 use xenialdan\customuitest\subcommand\TestCustomSubCommand;
 use xenialdan\customuitest\subcommand\TestModalSubCommand;
+use xenialdan\customuitest\subcommand\TestSimpleSubCommand;
 
 class Commands extends PluginCommand{
 	private $subCommands = [];
@@ -25,6 +26,7 @@ class Commands extends PluginCommand{
 
 		$this->loadSubCommand(new TestModalSubCommand($plugin));
 		$this->loadSubCommand(new TestCustomSubCommand($plugin));
+		$this->loadSubCommand(new TestSimpleSubCommand($plugin));
 	}
 
 	private function loadSubCommand(SubCommand $command){

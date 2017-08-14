@@ -25,8 +25,7 @@ class ModalFormRequestPacket extends DataPacket{
 		$this->putString($this->formData);
 	}
 
-	public function handle(NetworkSession $session) : bool{
-		var_dump($this);
+	public function handle(NetworkSession $session): bool{
 		return true;
 	}
 }
