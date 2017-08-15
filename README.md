@@ -21,3 +21,4 @@ How that is done you can read here: [(Compiling a virion without Poggit)](https:
 - [ ] Everything
 - [x] Rewrite Everything to not-messed-up Steadfast code
 - [x] Add Events
+- [ ] User's failure - prevention (noob protection)
