@@ -75,4 +75,8 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 	final public function getTitle(){
 		return $this->title;
 	}
+
+	public function getContent(): array{
+		return [$this->content, $this->buttons];
+	}
 }

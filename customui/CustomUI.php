@@ -17,4 +17,6 @@ interface CustomUI{
 	public function close(Player $player);
 
 	public function getTitle();
+
+	public function getContent() : array;
 }

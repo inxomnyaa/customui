@@ -86,4 +86,7 @@ class CustomForm implements CustomUI, \JsonSerializable{
 		return $this->title;
 	}
 
+	public function getContent(): array{
+		return $this->elements;
+	}
 }

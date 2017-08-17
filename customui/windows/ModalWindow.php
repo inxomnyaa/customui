@@ -64,4 +64,7 @@ class ModalWindow implements CustomUI, \JsonSerializable{
 		return $this->title;
 	}
 
+	public function getContent(): array{
+		return [$this->content, $this->trueButtonText, $this->falseButtonText];
+	}
 }
