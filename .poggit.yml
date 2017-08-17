@@ -3,7 +3,7 @@ branches:
 - master
 projects:
   customui:
-    path: "library"
+    path: "customui"
     type: library
     model: virion
   customuitest:
