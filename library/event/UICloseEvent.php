@@ -23,10 +23,13 @@ namespace xenialdan\customui\event;
 
 
 use pocketmine\network\mcpe\protocol\DataPacket;
+use pocketmine\Player;
 
 class UICloseEvent extends UIEvent{
 
-	public function __construct(DataPacket $packet){
-		parent::__construct($packet);
+	public static $handlerList = null;
+
+	public function __construct(DataPacket $packet, Player $player){
+		parent::__construct($packet, $player);
 	}
 }

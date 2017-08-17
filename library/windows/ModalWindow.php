@@ -60,4 +60,8 @@ class ModalWindow implements CustomUI, \JsonSerializable{
 		print __FILE__ . ': ' . var_dump($response);
 	}
 
+	final public function getTitle(){
+		return $this->title;
+	}
+
 }

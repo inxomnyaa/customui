@@ -52,7 +52,7 @@ class CustomForm implements CustomUI, \JsonSerializable{
 			];
 		}
 		foreach ($this->elements as $element){
-			$data['content'][] = $element;//TODO: test serialization of class
+			$data['content'][] = $element;
 		}
 		return $data;
 	}
@@ -72,7 +72,7 @@ class CustomForm implements CustomUI, \JsonSerializable{
 	 * @param Player $player
 	 */
 	public function handle($response, Player $player){
-		print __FILE__ . ': ' . var_dump($response);
+		print __FILE__ . ': ' . var_export($response, true);
 		foreach ($response as $elementKey => $elementValue){
 			if (isset($this->elements[$elementKey])){
 				$this->elements[$elementKey]->handle($elementValue, $player);
@@ -80,6 +80,10 @@ class CustomForm implements CustomUI, \JsonSerializable{
 				error_log(__CLASS__ . '::' . __METHOD__ . " Element with index {$elementKey} doesn't exists.");
 			}
 		}
+	}
+
+	final public function getTitle(){
+		return $this->title;
 	}
 
 }

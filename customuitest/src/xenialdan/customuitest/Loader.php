@@ -15,7 +15,6 @@ class Loader extends PluginBase{
 	public function onEnable(){
 		$this->getServer()->getCommandMap()->register(Commands::class, new Commands($this));
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-		PacketPool::registerPacket(new GuiDataPickItemPacket());
 		PacketPool::registerPacket(new ModalFormRequestPacket());
 		PacketPool::registerPacket(new ModalFormResponsePacket());
 		PacketPool::registerPacket(new ServerSettingsRequestPacket());

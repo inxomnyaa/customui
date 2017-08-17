@@ -26,12 +26,17 @@ class EventListener implements Listener{
 		$this->owner = $plugin;
 	}
 
+	/**
+	 * @group UI Response Handling
+	 * @param DataPacketReceiveEvent $ev
+	 */
 	public function onPacket(DataPacketReceiveEvent $ev){
 		$packet = $ev->getPacket();
+		$player = $ev->getPlayer();
 		switch ($packet::NETWORK_ID){
 			case ModalFormResponsePacket::NETWORK_ID: {
 				/** @var ModalFormResponsePacket $packet */
-				$this->handleModalFormResponse($packet);
+				$this->handleModalFormResponse($packet, $player);
 				$packet->reset();
 				$ev->setCancelled(true);
 				break;
@@ -39,16 +44,15 @@ class EventListener implements Listener{
 		}
 	}
 
-	public function handleModalFormResponse(ModalFormResponsePacket $packet): bool{
-		$ev = new UIDataReceiveEvent($packet);
-		if(empty($ev->getData())) $ev = new UICloseEvent($packet);
-		else{
-			//DO ANYTHING WITH THE DATA
-			//simple returns the button index
-			//modal returns true|false
-			//custom returns the data of all fields that have been requested
-			var_dump($ev->getData());
-		}
+	/**
+	 * @group UI Response Handling
+	 * @param ModalFormResponsePacket $packet
+	 * @param Player $player
+	 * @return bool
+	 */
+	public function handleModalFormResponse(ModalFormResponsePacket $packet, Player $player): bool{
+		$ev = new UIDataReceiveEvent($packet, $player);
+		if (empty($ev->getData())) $ev = new UICloseEvent($packet, $player);
 		Server::getInstance()->getPluginManager()->callEvent($ev);
 		return true;
 	}

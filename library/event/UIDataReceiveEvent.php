@@ -23,11 +23,14 @@ namespace xenialdan\customui\event;
 
 
 use pocketmine\network\mcpe\protocol\DataPacket;
+use pocketmine\Player;
 
 class UIDataReceiveEvent extends UIEvent{
 
-	public function __construct(DataPacket $packet){
-		parent::__construct($packet);
+	public static $handlerList = null;
+
+	public function __construct(DataPacket $packet, Player $player){
+		parent::__construct($packet, $player);
 	}
 
 	public function getData() {

@@ -15,8 +15,6 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 	protected $content = '';
 	/** @var Button[] */
 	protected $buttons = [];
-	/** @var string */
-	protected $json = '';
 
 	/**
 	 * SimpleForm only consists of clickable buttons
@@ -36,13 +34,9 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 	 */
 	public function addButton(Button $button){
 		$this->buttons[] = $button;
-		$this->json = '';
 	}
 
 	final public function jsonSerialize(){
-		if ($this->json != ''){
-			return $this->json;
-		}
 		$data = [
 			'type' => 'form',
 			'title' => $this->title,
@@ -50,7 +44,7 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 			'buttons' => []
 		];
 		foreach ($this->buttons as $button){
-			$data['buttons'][] = $button;//TODO: test serializaion of class
+			$data['buttons'][] = $button;
 		}
 		return $data;
 	}
@@ -76,5 +70,9 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 		} else{
 			error_log(__CLASS__ . '::' . __METHOD__ . " Button with index {$response} doesn't exists.");
 		}
+	}
+
+	final public function getTitle(){
+		return $this->title;
 	}
 }

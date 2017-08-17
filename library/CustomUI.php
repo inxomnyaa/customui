@@ -15,4 +15,6 @@ interface CustomUI{
 	 * @param Player $player
 	 */
 	public function close(Player $player);
+
+	public function getTitle();
 }
