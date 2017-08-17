@@ -11,7 +11,7 @@ abstract class UIEvent extends Event{
 
 	public static $handlerList = null;
 
-	/** @var DataPacket|ModalFormResponsePacket $packet*/
+	/** @var DataPacket|ModalFormResponsePacket $packet */
 	protected $packet;
 	/** @var Player */
 	protected $player;
@@ -21,15 +21,15 @@ abstract class UIEvent extends Event{
 		$this->player = $player;
 	}
 
-	public function getPacket() : DataPacket{
+	public function getPacket(): DataPacket{
 		return $this->packet;
 	}
 
-	public function getPlayer() : Player{
+	public function getPlayer(): Player{
 		return $this->player;
 	}
 
-	public function getID() : int {
+	public function getID(): int{
 		return $this->packet->formId;
 	}
 

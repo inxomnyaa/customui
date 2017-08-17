@@ -5,7 +5,6 @@ namespace xenialdan\customuitest\subcommand;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use xenialdan\customui\network\ModalFormRequestPacket;
-use xenialdan\customui\network\ShowModalFormPacket;
 use xenialdan\customui\windows\ModalWindow;
 
 class TestModalSubCommand extends SubCommand{

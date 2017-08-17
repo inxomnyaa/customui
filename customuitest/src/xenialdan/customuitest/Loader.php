@@ -4,7 +4,6 @@ namespace xenialdan\customuitest;
 
 use pocketmine\network\mcpe\protocol\PacketPool;
 use pocketmine\plugin\PluginBase;
-use xenialdan\customui\network\GuiDataPickItemPacket;
 use xenialdan\customui\network\ModalFormRequestPacket;
 use xenialdan\customui\network\ModalFormResponsePacket;
 use xenialdan\customui\network\ServerSettingsRequestPacket;

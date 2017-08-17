@@ -11,7 +11,6 @@ use xenialdan\customui\elements\Slider;
 use xenialdan\customui\elements\StepSlider;
 use xenialdan\customui\elements\Toggle;
 use xenialdan\customui\network\ModalFormRequestPacket;
-use xenialdan\customui\network\ShowModalFormPacket;
 use xenialdan\customui\windows\CustomForm;
 
 class TestCustomSubCommand extends SubCommand{

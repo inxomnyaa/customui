@@ -2,18 +2,11 @@
 
 namespace xenialdan\customuitest;
 
-use pocketmine\block\Block;
-use pocketmine\command\ConsoleCommandSender;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\server\DataPacketReceiveEvent;
-use pocketmine\item\Item;
-use pocketmine\nbt\tag\ListTag;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
-use pocketmine\tile\ItemFrame;
-use pocketmine\utils\TextFormat;
 use xenialdan\customui\elements\Dropdown;
 use xenialdan\customui\elements\Input;
 use xenialdan\customui\elements\Label;
@@ -87,7 +80,7 @@ class EventListener implements Listener{
 	 * @param Player $player
 	 * @return bool
 	 */
-	public function handleServerSettingsRequestPacket(ServerSettingsRequestPacket $packet, Player $player) : bool{
+	public function handleServerSettingsRequestPacket(ServerSettingsRequestPacket $packet, Player $player): bool{
 		// TODO maybe add event
 		$ui = new CustomForm('Server settings'); // TODO figure out how to add an image in the settings gui
 		$ui->addElement(new Label('Label'));

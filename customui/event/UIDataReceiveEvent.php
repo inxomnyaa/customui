@@ -33,11 +33,11 @@ class UIDataReceiveEvent extends UIEvent{
 		parent::__construct($packet, $player);
 	}
 
-	public function getData() {
+	public function getData(){
 		return json_decode($this->packet->formData);
 	}
 
-	public function getDataEncoded() {
+	public function getDataEncoded(){
 		return $this->packet->formData;
 	}
 }

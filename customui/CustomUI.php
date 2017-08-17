@@ -18,5 +18,5 @@ interface CustomUI{
 
 	public function getTitle();
 
-	public function getContent() : array;
+	public function getContent(): array;
 }
