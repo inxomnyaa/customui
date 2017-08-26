@@ -4,8 +4,8 @@ namespace xenialdan\customui\windows;
 
 use Exception;
 use pocketmine\Player;
-use xenialdan\customui\CustomUI;
-use xenialdan\customui\elements\Button;
+use customui\CustomUI;
+use customui\elements\Button;
 
 class SimpleForm implements CustomUI, \JsonSerializable{
 

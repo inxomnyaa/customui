@@ -7,7 +7,7 @@ use pocketmine\event\plugin\PluginEvent;
 use pocketmine\network\mcpe\protocol\DataPacket;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
-use xenialdan\customui\network\ModalFormResponsePacket;
+use customui\network\ModalFormResponsePacket;
 
 abstract class UIEvent extends PluginEvent{
 
