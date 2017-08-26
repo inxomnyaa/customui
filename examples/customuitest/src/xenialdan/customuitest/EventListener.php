@@ -104,8 +104,8 @@ class EventListener implements Listener{
 	 * @return bool
 	 */
 	public function handleServerSettingsResponsePacket(ServerSettingsResponsePacket $packet, Player $player): bool{
-		$ev = new UIDataReceiveEvent($packet, $player);
-		if (empty($ev->getData())) $ev = new UICloseEvent($packet, $player);
+		$ev = new UIDataReceiveEvent($this->owner, $packet, $player);
+		if (empty($ev->getData())) $ev = new UICloseEvent($this->owner, $packet, $player);
 		Server::getInstance()->getPluginManager()->callEvent($ev);
 		return true;
 	}

@@ -3,11 +3,13 @@
 namespace xenialdan\customui\event;
 
 use pocketmine\event\Event;
+use pocketmine\event\plugin\PluginEvent;
 use pocketmine\network\mcpe\protocol\DataPacket;
 use pocketmine\Player;
+use pocketmine\plugin\Plugin;
 use xenialdan\customui\network\ModalFormResponsePacket;
 
-abstract class UIEvent extends Event{
+abstract class UIEvent extends PluginEvent{
 
 	public static $handlerList = null;
 
@@ -16,9 +18,10 @@ abstract class UIEvent extends Event{
 	/** @var Player */
 	protected $player;
 
-	public function __construct(DataPacket $packet, Player $player){
+	public function __construct(Plugin $plugin, DataPacket $packet, Player $player){
 		$this->packet = $packet;
 		$this->player = $player;
+		parent::__construct($plugin);
 	}
 
 	public function getPacket(): DataPacket{
