@@ -4,8 +4,8 @@ namespace xenialdan\customui\windows;
 
 use Exception;
 use pocketmine\Player;
-use customui\CustomUI;
-use customui\elements\Button;
+use xenialdan\customui\CustomUI;
+use xenialdan\customui\elements\Button;
 
 class SimpleForm implements CustomUI, \JsonSerializable{
 
@@ -22,7 +22,7 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 	 * @param string $title
 	 * @param string $content
 	 */
-	public function __construct($title, $content){
+	public function __construct($title, $content = ''){
 		$this->title = $title;
 		$this->content = $content;
 	}

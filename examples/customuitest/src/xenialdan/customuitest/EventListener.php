@@ -67,8 +67,8 @@ class EventListener implements Listener{
 	 * @return bool
 	 */
 	public function handleModalFormResponse(ModalFormResponsePacket $packet, Player $player): bool{
-		$ev = new UIDataReceiveEvent($packet, $player);
-		if (empty($ev->getData())) $ev = new UICloseEvent($packet, $player);
+		$ev = new UIDataReceiveEvent($this->owner, $packet, $player);
+		if (is_null($ev->getData())) $ev = new UICloseEvent($this->owner, $packet, $player);
 		Server::getInstance()->getPluginManager()->callEvent($ev);
 		return true;
 	}
@@ -105,7 +105,7 @@ class EventListener implements Listener{
 	 */
 	public function handleServerSettingsResponsePacket(ServerSettingsResponsePacket $packet, Player $player): bool{
 		$ev = new UIDataReceiveEvent($this->owner, $packet, $player);
-		if (empty($ev->getData())) $ev = new UICloseEvent($this->owner, $packet, $player);
+		if (is_null($ev->getData())) $ev = new UICloseEvent($this->owner, $packet, $player);
 		Server::getInstance()->getPluginManager()->callEvent($ev);
 		return true;
 	}

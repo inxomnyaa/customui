@@ -3,8 +3,8 @@
 namespace xenialdan\customui\windows;
 
 use pocketmine\Player;
-use customui\CustomUI;
-use customui\elements\UIElement;
+use xenialdan\customui\CustomUI;
+use xenialdan\customui\elements\UIElement;
 
 class CustomForm implements CustomUI, \JsonSerializable{
 

@@ -4,7 +4,7 @@ namespace xenialdan\customui\windows;
 
 use Exception;
 use pocketmine\Player;
-use customui\CustomUI;
+use xenialdan\customui\CustomUI;
 
 class ModalWindow implements CustomUI, \JsonSerializable{
 
