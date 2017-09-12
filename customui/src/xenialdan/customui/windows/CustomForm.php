@@ -14,6 +14,8 @@ class CustomForm implements CustomUI, \JsonSerializable{
 	protected $elements = [];
 	/** @var string Only for server settings */
 	protected $iconURL = '';
+	/** @var int */
+	private $id;
 
 	/**
 	 * CustomForm is a totally custom and dynamic form
@@ -88,5 +90,13 @@ class CustomForm implements CustomUI, \JsonSerializable{
 
 	public function getContent(): array{
 		return $this->elements;
+	}
+
+	public function setID(int $id){
+		$this->id = $id;
+	}
+
+	public function getID(): int{
+		return $this->id;
 	}
 }

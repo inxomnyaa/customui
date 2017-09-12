@@ -4,8 +4,8 @@ namespace xenialdan\customuitest\subcommand;
 
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
-use xenialdan\customui\network\ModalFormRequestPacket;
-use xenialdan\customui\windows\ModalWindow;
+use xenialdan\customui\API;
+use xenialdan\customuitest\Loader;
 
 class TestModalSubCommand extends SubCommand{
 
@@ -35,13 +35,7 @@ class TestModalSubCommand extends SubCommand{
 	 * @return bool
 	 */
 	public function execute(CommandSender $sender, array $args){
-		$player = $sender->getServer()->getPlayer($sender->getName());
-		$modal = new ModalWindow('Bananas', 'We finally want bananas!', 'yes', 'no');
-		$pk = new ModalFormRequestPacket();
-		$pk->formId = 1;
-		$pk->formData = json_encode($modal);
-		var_dump($pk);
-		$player->dataPacket($pk);
+		API::showUIbyID($this->getPlugin(), Loader::$modalUI, $sender);
 		return true;
 	}
 }

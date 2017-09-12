@@ -7,6 +7,7 @@ use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
+use xenialdan\customui\API;
 use xenialdan\customui\elements\Dropdown;
 use xenialdan\customui\elements\Input;
 use xenialdan\customui\elements\Label;
@@ -124,7 +125,8 @@ class EventListener implements Listener{
 				break;
 			}
 			default: {
-				print 'Any other formId' . PHP_EOL . var_export($event->getData(), true);
+				print 'Any other formId' . PHP_EOL;
+				API::handle($event->getPlugin(), $event->getID(), $event->getData(), $event->getPlayer());
 				break;
 			}
 		}

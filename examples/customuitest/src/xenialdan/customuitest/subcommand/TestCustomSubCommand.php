@@ -4,14 +4,8 @@ namespace xenialdan\customuitest\subcommand;
 
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
-use xenialdan\customui\elements\Dropdown;
-use xenialdan\customui\elements\Input;
-use xenialdan\customui\elements\Label;
-use xenialdan\customui\elements\Slider;
-use xenialdan\customui\elements\StepSlider;
-use xenialdan\customui\elements\Toggle;
-use xenialdan\customui\network\ModalFormRequestPacket;
-use xenialdan\customui\windows\CustomForm;
+use xenialdan\customui\API;
+use xenialdan\customuitest\Loader;
 
 class TestCustomSubCommand extends SubCommand{
 
@@ -41,19 +35,7 @@ class TestCustomSubCommand extends SubCommand{
 	 * @return bool
 	 */
 	public function execute(CommandSender $sender, array $args){
-		$player = $sender->getServer()->getPlayer($sender->getName());
-		$ui = new CustomForm('Testwindow');
-		$ui->addElement(new Label('Label'));
-		$ui->addElement(new Dropdown('Dropdown', ['name1', 'name2']));
-		$ui->addElement(new Input('Input', 'text'));
-		$ui->addElement(new Slider('Slider', 5, 10, 0.5));
-		$ui->addElement(new StepSlider('Stepslider', [5, 7, 9, 11]));
-		$ui->addElement(new Toggle('Toggle'));
-		$pk = new ModalFormRequestPacket();
-		$pk->formId = 1;
-		$pk->formData = json_encode($ui);
-		var_dump($pk);
-		$player->dataPacket($pk);
+		API::showUIbyID($this->getPlugin(), Loader::$customUI, $sender);
 		return true;
 	}
 }

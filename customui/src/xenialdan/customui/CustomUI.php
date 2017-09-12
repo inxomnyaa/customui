@@ -19,4 +19,8 @@ interface CustomUI{
 	public function getTitle();
 
 	public function getContent(): array;
+
+	public function setID(int $id);
+
+	public function getID() : int;
 }

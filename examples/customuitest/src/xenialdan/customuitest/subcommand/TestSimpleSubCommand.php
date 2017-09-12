@@ -4,9 +4,8 @@ namespace xenialdan\customuitest\subcommand;
 
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
-use xenialdan\customui\elements\Button;
-use xenialdan\customui\network\ModalFormRequestPacket;
-use xenialdan\customui\windows\SimpleForm;
+use xenialdan\customui\API;
+use xenialdan\customuitest\Loader;
 
 class TestSimpleSubCommand extends SubCommand{
 
@@ -36,17 +35,7 @@ class TestSimpleSubCommand extends SubCommand{
 	 * @return bool
 	 */
 	public function execute(CommandSender $sender, array $args){
-		$player = $sender->getServer()->getPlayer($sender->getName());
-		$ui = new SimpleForm('A simple form with buttons only', '');
-		$ui->addButton(new Button('Button'));
-		$button2 = new Button('ImageButton');
-		$button2->addImage(Button::IMAGE_TYPE_URL, 'https://server.wolvesfortress.de/MCPEGUIimages/hd/X.png');
-		$ui->addButton($button2);
-		$pk = new ModalFormRequestPacket();
-		$pk->formId = 1;
-		$pk->formData = json_encode($ui);
-		var_dump($pk);
-		$player->dataPacket($pk);
+		API::showUIbyID($this->getPlugin(), Loader::$simpleUI, $sender);
 		return true;
 	}
 }

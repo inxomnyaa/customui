@@ -16,6 +16,8 @@ class ModalWindow implements CustomUI, \JsonSerializable{
 	protected $trueButtonText = '';
 	/** @var string */
 	protected $falseButtonText = '';
+	/** @var int */
+	private $id;
 
 	/**
 	 * This is a window to show a simple text to the player
@@ -57,7 +59,7 @@ class ModalWindow implements CustomUI, \JsonSerializable{
 	 * @throws Exception
 	 */
 	final public function handle($response, Player $player){
-		print __FILE__ . ': ' . var_dump($response);
+		print __FILE__ . ': ' . var_export($response, true);
 	}
 
 	final public function getTitle(){
@@ -66,5 +68,13 @@ class ModalWindow implements CustomUI, \JsonSerializable{
 
 	public function getContent(): array{
 		return [$this->content, $this->trueButtonText, $this->falseButtonText];
+	}
+
+	public function setID(int $id){
+		$this->id = $id;
+	}
+
+	public function getID(): int{
+		return $this->id;
 	}
 }

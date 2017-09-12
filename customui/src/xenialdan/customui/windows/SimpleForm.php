@@ -15,6 +15,8 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 	protected $content = '';
 	/** @var Button[] */
 	protected $buttons = [];
+	/** @var int */
+	private $id;
 
 	/**
 	 * SimpleForm only consists of clickable buttons
@@ -64,7 +66,7 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 	 * @throws Exception
 	 */
 	final public function handle($response, Player $player){
-		print __FILE__ . ': ' . var_dump($response);
+		print __FILE__ . ': ' . var_export($response, true);
 		if (isset($this->buttons[$response])){
 			$this->buttons[$response]->handle(true, $player);
 		} else{
@@ -78,5 +80,13 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 
 	public function getContent(): array{
 		return [$this->content, $this->buttons];
+	}
+
+	public function setID(int $id){
+		$this->id = $id;
+	}
+
+	public function getID(): int{
+		return $this->id;
 	}
 }
