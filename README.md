@@ -1,5 +1,5 @@
 # customui
-Library status: [![Poggit-CI](https://poggit.pmmp.io/ci.badge/thebigsmileXD/customui/customui)](https://poggit.pmmp.io/ci/thebigsmileXD/customui/customui)
+Library status + Virion download: [![Poggit-CI](https://poggit.pmmp.io/ci.badge/thebigsmileXD/customui/customui)](https://poggit.pmmp.io/ci/thebigsmileXD/customui/customui)
 Example Plugin Status: [![Poggit-CI](https://poggit.pmmp.io/ci.badge/thebigsmileXD/customui/customuitest)](https://poggit.pmmp.io/ci/thebigsmileXD/customui/customuitest)
 
 Library to create custom UI's in MCPE 1.2+
@@ -9,16 +9,15 @@ Inspired by Hydreon/Steadfast2.
 - Create custom UI's
 - Send/close them to/from players
 - Handle the data/replies
-- Include as viron into your plugins to create new UI's
 - Dynamically generate window data
-# How to use:
-Check out the source of the example plugin (customuitest). Theres a text file explaining where the library files have to go.
+- Include as viron into your plugins to create new UI's
 
-Othervise compile your plugin using the library as virion, either by uploading it to GitHub and let Poggit do it for you [(Compiling a virion with Poggit)](https://github.com/poggit/support/blob/master/virion.md#compiling-a-virion-with-poggit), or via the virion library
+# How to use this repo?
+NEW! In-depth explaination in the wiki!
 
-How that is done you can read here: [(Compiling a virion without Poggit)](https://github.com/poggit/support/blob/master/virion.md#compiling-a-virion-without-poggit)
-# TODO:
-- [ ] Everything
-- [x] Rewrite Everything to not-messed-up Steadfast code
-- [x] Add Events
-- [ ] User's failure - prevention (noob protection)
+Check out the source of the example plugin (customuitest). It is a full example of registering, sending and handling responses via plugins :)
+
+# How do i code with it?
+When developing plugins, you want to get [DEVirion](https://github.com/poggit/devirion), and load a virion from source.
+
+Read [the virion support information](https://github.com/poggit/support) and the [customui wiki](https://github.com/xenialdan/customui/wiki) for more in-depth explainations
