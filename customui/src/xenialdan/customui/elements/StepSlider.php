@@ -69,8 +69,13 @@ class StepSlider extends UIElement{
 		];
 	}
 
+	/**
+	 * @param null $value
+	 * @param Player $player
+	 * @return mixed
+	 */
 	public function handle($value, Player $player){
-
+		return $this->steps[$value];
 	}
 
 }

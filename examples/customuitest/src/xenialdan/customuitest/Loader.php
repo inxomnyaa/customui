@@ -22,9 +22,8 @@ use xenialdan\customui\windows\SimpleForm;
 
 class Loader extends PluginBase{
 
-	public static $simpleUI;
-	public static $customUI;
-	public static $modalUI;
+	/** @var int[] */
+	public static $uis;
 
 	public function onEnable(){
 		$this->getServer()->getCommandMap()->register(Commands::class, new Commands($this));
@@ -34,16 +33,20 @@ class Loader extends PluginBase{
 		PacketPool::registerPacket(new ServerSettingsRequestPacket());
 		PacketPool::registerPacket(new ServerSettingsResponsePacket());
 		/** call this AFTER registering packets! */
-		$this->registerUIs();
+		$this->reloadUIs();
 	}
 
-	private function registerUIs(){
+	/**
+	 * This function now is called reloadUIs and public to enable reloading dynamic fields/values
+	 */
+	public function reloadUIs(){
+		UIAPI::resetUIs($this);
 		$ui = new SimpleForm('A simple form with buttons only', '');
 		$ui->addButton(new Button('Button'));
 		$button2 = new Button('ImageButton');
 		$button2->addImage(Button::IMAGE_TYPE_URL, 'https://server.wolvesfortress.de/MCPEGUIimages/hd/X.png');
 		$ui->addButton($button2);
-		self::$simpleUI = UIAPI::addUI($this, $ui);
+		self::$uis['simpleUI'] = UIAPI::addUI($this, $ui);
 		/* ********* */
 		$ui = new CustomForm('Testwindow');
 		$ui->addElement(new Label('Label'));
@@ -52,10 +55,18 @@ class Loader extends PluginBase{
 		$ui->addElement(new Slider('Slider', 5, 10, 0.5));
 		$ui->addElement(new StepSlider('Stepslider', [5, 7, 9, 11]));
 		$ui->addElement(new Toggle('Toggle'));
-		self::$customUI = UIAPI::addUI($this, $ui);
+		self::$uis['customUI'] = UIAPI::addUI($this, $ui);
 		/* ********* */
 		$ui = new ModalWindow('Bananas', 'We finally want bananas!', 'yes', 'no');
-		self::$modalUI = UIAPI::addUI($this, $ui);
-		print self::$simpleUI . self::$customUI . self::$modalUI;
+		self::$uis['modalUI'] = UIAPI::addUI($this, $ui);
+		/* ********* */
+		$ui = new CustomForm('Server Settings Test');
+		$ui->addElement(new Label('Label'));
+		$ui->addElement(new Dropdown('Dropdown', ['name1', 'name2']));
+		$ui->addElement(new Input('Input', 'text'));
+		$ui->addElement(new Slider('Slider', 5, 10, 0.5));
+		$ui->addElement(new StepSlider('Stepslider', [5, 7, 9, 11]));
+		$ui->addElement(new Toggle('Toggle'));
+		self::$uis['serverSettingsUI'] = UIAPI::addUI($this, $ui);
 	}
 }

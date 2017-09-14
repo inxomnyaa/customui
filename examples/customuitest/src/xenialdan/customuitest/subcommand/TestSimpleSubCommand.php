@@ -4,7 +4,7 @@ namespace xenialdan\customuitest\subcommand;
 
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
-use xenialdan\customui\API;
+use xenialdan\customui\API as UIAPI;
 use xenialdan\customuitest\Loader;
 
 class TestSimpleSubCommand extends SubCommand{
@@ -35,7 +35,10 @@ class TestSimpleSubCommand extends SubCommand{
 	 * @return bool
 	 */
 	public function execute(CommandSender $sender, array $args){
-		API::showUIbyID($this->getPlugin(), Loader::$simpleUI, $sender);
+		// if you want to reload dynamic fields (for example a player list in a dropdown), you also need a resetUIs call
+		UIAPI::resetUIs($this->getPlugin());
+		// it does not hurt to call the resetUIs, but might be useless if an UI never changes :)
+		UIAPI::showUIbyID($this->getPlugin(), Loader::$uis['simpleUI'], $sender);
 		return true;
 	}
 }

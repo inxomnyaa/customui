@@ -69,8 +69,15 @@ class Dropdown extends UIElement{
 		];
 	}
 
+	/**
+	 * Returns the value of the selected option
+	 *
+	 * @param null $value
+	 * @param Player $player
+	 * @return mixed
+	 */
 	public function handle($value, Player $player){
-
+		return $this->options[$value];
 	}
 
 }

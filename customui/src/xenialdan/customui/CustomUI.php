@@ -22,5 +22,5 @@ interface CustomUI{
 
 	public function setID(int $id);
 
-	public function getID() : int;
+	public function getID(): int;
 }

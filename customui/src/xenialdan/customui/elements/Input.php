@@ -36,8 +36,13 @@ class Input extends UIElement{
 		];
 	}
 
+	/**
+	 * @param null $value
+	 * @param Player $player
+	 * @return mixed
+	 */
 	public function handle($value, Player $player){
-
+		return $value;
 	}
 
 }

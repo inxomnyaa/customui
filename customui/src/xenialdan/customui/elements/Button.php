@@ -58,8 +58,15 @@ class Button extends UIElement{
 		return $data;
 	}
 
+	/**
+	 * Returns the text of the button
+	 *
+	 * @param null $value
+	 * @param Player $player
+	 * @return mixed
+	 */
 	public function handle($value, Player $player){
-
+		return $this->text;
 	}
 
 }

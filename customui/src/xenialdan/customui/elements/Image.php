@@ -29,8 +29,15 @@ class Image extends UIElement{
 		];
 	}
 
+	/**
+	 * TODO
+	 *
+	 * @param null $value
+	 * @param Player $player
+	 * @return mixed
+	 */
 	public function handle($value, Player $player){
-
+		return null;
 	}
 
 }

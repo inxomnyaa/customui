@@ -25,6 +25,10 @@ class API{
 		return $id;
 	}
 
+	public static function resetUIs(Plugin $plugin){
+		self::$UIs[$plugin->getName()] = [];
+	}
+
 	/**
 	 * @return array(CustomUI[])
 	 */
@@ -36,8 +40,17 @@ class API{
 	 * @param Plugin $plugin
 	 * @return CustomUI[]
 	 */
-	public static function getPluginUIs(Plugin $plugin) : array {
+	public static function getPluginUIs(Plugin $plugin): array{
 		return self::$UIs[$plugin->getName()];
+	}
+
+	/**
+	 * @param Plugin $plugin
+	 * @param int $id
+	 * @return CustomUI
+	 */
+	public static function getPluginUI(Plugin $plugin, int $id): CustomUI{
+		return self::$UIs[$plugin->getName()][$id];
 	}
 
 	public static function handle(Plugin $plugin, int $id, $response, Player $player){

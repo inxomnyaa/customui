@@ -72,6 +72,7 @@ class CustomForm implements CustomUI, \JsonSerializable{
 	 *
 	 * @param array $response
 	 * @param Player $player
+	 * @return array containing the options, data, responses etc
 	 */
 	public function handle($response, Player $player){
 		print __FILE__ . ': ' . var_export($response, true);
@@ -82,6 +83,14 @@ class CustomForm implements CustomUI, \JsonSerializable{
 				error_log(__CLASS__ . '::' . __METHOD__ . " Element with index {$elementKey} doesn't exists.");
 			}
 		}
+
+		$return = [];
+		foreach ($response as $elementKey => $elementValue){
+			if (isset($this->elements[$elementKey])){
+				if (!is_null($value = $this->elements[$elementKey]->handle($elementValue, $player))) $return[] = $value;
+			}
+		}
+		return $return;
 	}
 
 	final public function getTitle(){

@@ -8,18 +8,17 @@ use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use xenialdan\customui\API;
-use xenialdan\customui\elements\Dropdown;
-use xenialdan\customui\elements\Input;
-use xenialdan\customui\elements\Label;
-use xenialdan\customui\elements\Slider;
-use xenialdan\customui\elements\StepSlider;
-use xenialdan\customui\elements\Toggle;
+use xenialdan\customui\API as UIAPI;
 use xenialdan\customui\event\UICloseEvent;
 use xenialdan\customui\event\UIDataReceiveEvent;
 use xenialdan\customui\network\ModalFormResponsePacket;
 use xenialdan\customui\network\ServerSettingsRequestPacket;
 use xenialdan\customui\network\ServerSettingsResponsePacket;
 use xenialdan\customui\windows\CustomForm;
+
+/*
+ *  MAKE SURE YOU HAVE THIS AS UIAPI!
+ */
 
 class EventListener implements Listener{
 	/** @var Loader */
@@ -74,30 +73,6 @@ class EventListener implements Listener{
 		return true;
 	}
 
-
-	/**
-	 * @group UI Response Handling
-	 * @param ServerSettingsRequestPacket $packet
-	 * @param Player $player
-	 * @return bool
-	 */
-	public function handleServerSettingsRequestPacket(ServerSettingsRequestPacket $packet, Player $player): bool{
-		// TODO maybe add event
-		$ui = new CustomForm('Server settings'); // TODO figure out how to add an image in the settings gui
-		$ui->addElement(new Label('Label'));
-		$ui->addElement(new Dropdown('Dropdown', ['name1', 'name2']));
-		$ui->addElement(new Input('Input', 'text'));
-		$ui->addElement(new Slider('Slider', 5, 10, 0.5));
-		$ui->addElement(new StepSlider('Stepslider', [5, 7, 9, 11]));
-		$ui->addElement(new Toggle('Toggle'));
-		$pk = new ServerSettingsResponsePacket();
-		$pk->formId = 0;
-		$pk->formData = json_encode($ui);
-		var_dump($pk);
-		$player->dataPacket($pk);
-		return true;
-	}
-
 	/**
 	 * @group UI Response Handling
 	 * @param ServerSettingsResponsePacket $packet
@@ -111,22 +86,70 @@ class EventListener implements Listener{
 		return true;
 	}
 
+
+	/**
+	 * @group UI Response Handling
+	 * @param ServerSettingsRequestPacket $packet
+	 * @param Player $player
+	 * @return bool
+	 */
+	public function handleServerSettingsRequestPacket(ServerSettingsRequestPacket $packet, Player $player): bool{
+		// TODO create API for this
+		$ui = UIAPI::getPluginUI($this->owner, Loader::$uis['serverSettingsUI']);
+		$pk = new ServerSettingsResponsePacket();
+		$pk->formId = Loader::$uis['serverSettingsUI'];
+		$pk->formData = json_encode($ui);
+		$player->dataPacket($pk);
+		return true;
+	}
+
 	/**
 	 * @param UIDataReceiveEvent $event
 	 */
 	public function onUIDataReceiveEvent(UIDataReceiveEvent $event){
-		switch ($event->getID()){
-			case '0': {
-				print 'ServerSettingsResponsePacket' . PHP_EOL . var_export($event->getData(), true);
+		/* This makes sure that only events for this plugin are handled */
+		if ($event->getPlugin() !== $this->owner) return;
+		switch ($id = $event->getID()){
+			case Loader::$uis['modalUI']:
+			case Loader::$uis['customUI']:
+			case Loader::$uis['serverSettingsUI']: {
+				/** @var CustomForm $ui */
+				// Create an useful array
+				$data = $event->getData();
+				// Player
+				$ui = UIAPI::getPluginUI($this->owner, $id);
+				$response = $ui->handle($data, $event->getPlayer());
+				// Now, do whatever you want with the response
+				var_dump($response); // Look at the var_dumps and learn from them :)
 				break;
 			}
-			case '1': {
-				print 'ModalFormResponsePacket' . PHP_EOL . var_export($event->getData(), true);
+			case Loader::$uis['simpleUI']: {
+				/** @var CustomForm $ui */
+				// Create an useful array
+				$data = $event->getData();
+				// Player
+				$ui = UIAPI::getPluginUI($this->owner, $id);
+				$response = $ui->handle($data, $event->getPlayer());
+				// Now, do whatever you want with the response
+				var_dump($response); // In this case it returns the text of the clicked button :)
+				switch ($response){
+					case 'Button': {
+						// an example for running commands
+						$command = "say i clicked the button 'Button'";
+						$this->owner->getServer()->getCommandMap()->dispatch($event->getPlayer(), $command);
+						break;
+					}
+					case 'ImageButton': {
+						$command = "say i clicked the button 'ImageButton'";
+						$this->owner->getServer()->getCommandMap()->dispatch($event->getPlayer(), $command);
+						break;
+					}
+				}
 				break;
 			}
 			default: {
 				print 'Any other formId' . PHP_EOL;
-				API::handle($event->getPlugin(), $event->getID(), $event->getData(), $event->getPlayer());
+				var_dump(API::handle($event->getPlugin(), $event->getID(), $event->getData(), $event->getPlayer()));
 				break;
 			}
 		}

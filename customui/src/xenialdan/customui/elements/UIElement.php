@@ -20,7 +20,7 @@ abstract class UIElement implements \JsonSerializable{
 	/**
 	 * @param $value
 	 * @param Player $player
-	 * @return
+	 * @return mixed
 	 */
 	abstract public function handle($value, Player $player);
 

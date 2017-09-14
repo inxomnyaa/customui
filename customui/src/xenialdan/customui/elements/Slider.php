@@ -79,8 +79,15 @@ class Slider extends UIElement{
 		return $data;
 	}
 
+	/**
+	 * Returns the float value it was set to
+	 *
+	 * @param null $value
+	 * @param Player $player
+	 * @return mixed
+	 */
 	public function handle($value, Player $player){
-
+		return $value;
 	}
 
 }
