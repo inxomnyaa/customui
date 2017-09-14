@@ -20,4 +20,4 @@ Check out the source of the example plugin (customuitest). It is a full example 
 # How do i code with it?
 When developing plugins, you want to get [DEVirion](https://github.com/poggit/devirion), and load a virion from source.
 
-Read [the virion support information](https://github.com/poggit/support) and the [customui wiki](https://github.com/xenialdan/customui/wiki) for more in-depth explainations
+Read [the virion support information](https://github.com/poggit/support) and the [customui wiki](https://github.com/thebigsmilexd/customui/wiki) for more in-depth explainations
