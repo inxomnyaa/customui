@@ -61,7 +61,7 @@ class Button extends UIElement{
 	/**
 	 * Returns the text of the button
 	 *
-	 * @param null $value
+	 * @param null|int|array $value
 	 * @param Player $player
 	 * @return mixed
 	 */

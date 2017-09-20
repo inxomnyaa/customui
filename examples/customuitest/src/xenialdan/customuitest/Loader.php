@@ -57,7 +57,7 @@ class Loader extends PluginBase{
 		$ui->addElement(new Toggle('Toggle'));
 		self::$uis['customUI'] = UIAPI::addUI($this, $ui);
 		/* ********* */
-		$ui = new ModalWindow('Bananas', 'We finally want bananas!', 'yes', 'no');
+		$ui = new ModalWindow('Minecraft 1.2', 'Enable spacebar heating?', 'Yes', 'No');
 		self::$uis['modalUI'] = UIAPI::addUI($this, $ui);
 		/* ********* */
 		$ui = new CustomForm('Server Settings Test');

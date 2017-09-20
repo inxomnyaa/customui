@@ -59,19 +59,19 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 	}
 
 	/**
-	 *
-	 *
 	 * @param int $response Button index
 	 * @param Player $player
+	 * @return string containing the value of the clicked button
 	 * @throws Exception
 	 */
-	final public function handle($response, Player $player){
-		print __FILE__ . ': ' . var_export($response, true);
+	public function handle($response, Player $player){
+		$return = "";
 		if (isset($this->buttons[$response])){
-			$this->buttons[$response]->handle(true, $player);
+			if (!is_null($value = $this->buttons[$response]->handle($response, $player))) $return = $value;
 		} else{
 			error_log(__CLASS__ . '::' . __METHOD__ . " Button with index {$response} doesn't exists.");
 		}
+		return $return;
 	}
 
 	final public function getTitle(){

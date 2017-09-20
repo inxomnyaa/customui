@@ -108,7 +108,7 @@ class EventListener implements Listener{
 	 */
 	public function onUIDataReceiveEvent(UIDataReceiveEvent $event){
 		/* This makes sure that only events for this plugin are handled */
-		if ($event->getPlugin() !== $this->owner) return;
+		if($event->getPlugin() !== $this->owner) return;
 		switch ($id = $event->getID()){
 			case Loader::$uis['modalUI']:
 			case Loader::$uis['customUI']:

@@ -35,8 +35,8 @@ class TestCustomSubCommand extends SubCommand{
 	 * @return bool
 	 */
 	public function execute(CommandSender $sender, array $args){
-		// if you want to reload dynamic fields (for example a player list in a dropdown), you also need a resetUIs call
-		UIAPI::resetUIs($this->getPlugin());
+		// if you want to reload dynamic fields (for example a player list in a dropdown), you also need a reloadUIs call
+		$this->getPlugin()->reloadUIs();
 		// it does not hurt to call the resetUIs, but might be useless if an UI never changes :)
 		UIAPI::showUIbyID($this->getPlugin(), Loader::$uis['customUI'], $sender);
 		return true;

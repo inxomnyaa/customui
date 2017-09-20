@@ -67,15 +67,11 @@ class CustomForm implements CustomUI, \JsonSerializable{
 	}
 
 	/**
-	 * @notice It not final because some logic may
-	 * depends on some elements at the same time
-	 *
 	 * @param array $response
 	 * @param Player $player
 	 * @return array containing the options, data, responses etc
 	 */
 	public function handle($response, Player $player){
-		print __FILE__ . ': ' . var_export($response, true);
 		foreach ($response as $elementKey => $elementValue){
 			if (isset($this->elements[$elementKey])){
 				$this->elements[$elementKey]->handle($elementValue, $player);

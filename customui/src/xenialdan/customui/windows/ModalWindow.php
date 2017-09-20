@@ -52,14 +52,12 @@ class ModalWindow implements CustomUI, \JsonSerializable{
 	}
 
 	/**
-	 *
-	 *
-	 * @param int $response Button index
+	 * @param array $response
 	 * @param Player $player
-	 * @throws Exception
+	 * @return boolean depending on which button was clicked
 	 */
 	final public function handle($response, Player $player){
-		print __FILE__ . ': ' . var_export($response, true);
+		return $response[0];
 	}
 
 	final public function getTitle(){
