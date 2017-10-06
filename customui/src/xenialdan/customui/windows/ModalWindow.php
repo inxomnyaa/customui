@@ -5,6 +5,7 @@ namespace xenialdan\customui\windows;
 use Exception;
 use pocketmine\Player;
 use xenialdan\customui\CustomUI;
+use xenialdan\customui\elements\UIElement;
 
 class ModalWindow implements CustomUI, \JsonSerializable{
 
@@ -75,4 +76,14 @@ class ModalWindow implements CustomUI, \JsonSerializable{
 	public function getID(): int{
 		return $this->id;
 	}
+
+	/**
+	 * @param int $index
+	 * @return UIElement|null
+	 */
+	public function getElement(int $index){
+		return null;
+	}
+
+	public function setElement(UIElement $element, int $index){	}
 }

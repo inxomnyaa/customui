@@ -3,6 +3,8 @@
 namespace xenialdan\customui;
 
 use pocketmine\Player;
+use xenialdan\customui\elements\Button;
+use xenialdan\customui\elements\UIElement;
 
 interface CustomUI{
 
@@ -19,6 +21,14 @@ interface CustomUI{
 	public function getTitle();
 
 	public function getContent(): array;
+
+	/**
+	 * @param int $index
+	 * @return UIElement|Button|null
+	 */
+	public function getElement(int $index);
+
+	public function setElement(UIElement $element, int $index);
 
 	public function setID(int $id);
 

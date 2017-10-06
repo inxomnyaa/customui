@@ -79,11 +79,10 @@ class API{
 	 * @return array
 	 */
 	public static function playerArrayToNameArray(array $players): array{
-		$return = [];
-		/** @var OfflinePlayer|Player $player */
-		foreach ($players as $player){
-			$return[] = $player->getName();
-		}
+		$return = array_map(function ($player){
+			/** @var OfflinePlayer|Player $player */
+			return $player->getName();
+		}, $players);
 		sort($return, SORT_NATURAL);
 		return $return;
 	}

@@ -6,6 +6,7 @@ use Exception;
 use pocketmine\Player;
 use xenialdan\customui\CustomUI;
 use xenialdan\customui\elements\Button;
+use xenialdan\customui\elements\UIElement;
 
 class SimpleForm implements CustomUI, \JsonSerializable{
 
@@ -88,5 +89,18 @@ class SimpleForm implements CustomUI, \JsonSerializable{
 
 	public function getID(): int{
 		return $this->id;
+	}
+
+	/**
+	 * @param int $index
+	 * @return Button
+	 */
+	public function getElement(int $index): Button{
+		return $this->buttons[$index];
+	}
+
+	public function setElement(UIElement $element, int $index){
+		if(!$element instanceof  Button) return;
+		$this->buttons[$index] = $element;
 	}
 }

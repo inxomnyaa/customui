@@ -4,6 +4,7 @@ namespace xenialdan\customui\windows;
 
 use pocketmine\Player;
 use xenialdan\customui\CustomUI;
+use xenialdan\customui\elements\Button;
 use xenialdan\customui\elements\UIElement;
 
 class CustomForm implements CustomUI, \JsonSerializable{
@@ -103,5 +104,18 @@ class CustomForm implements CustomUI, \JsonSerializable{
 
 	public function getID(): int{
 		return $this->id;
+	}
+
+	/**
+	 * @param int $index
+	 * @return UIElement|null
+	 */
+	public function getElement(int $index){
+		return $this->elements[$index];
+	}
+
+	public function setElement(UIElement $element, int $index){
+		if($element instanceof Button) return;
+		$this->elements[$index] = $element;
 	}
 }
