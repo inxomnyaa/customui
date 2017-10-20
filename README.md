@@ -1,6 +1,6 @@
 # customui
 
-# I will drop support and development of customui api. use https://t.co/DzreGFzErG by @dktapps instead - and blame hin on issues
+# I will drop support and development of customui api. use https://t.co/DzreGFzErG by @dktapps instead - and blame him on issues
 
 Library status + Virion download: [![Poggit-CI](https://poggit.pmmp.io/ci.badge/thebigsmileXD/customui/customui)](https://poggit.pmmp.io/ci/thebigsmileXD/customui/customui)
 Example Plugin Status: [![Poggit-CI](https://poggit.pmmp.io/ci.badge/thebigsmileXD/customui/customuitest)](https://poggit.pmmp.io/ci/thebigsmileXD/customui/customuitest)
