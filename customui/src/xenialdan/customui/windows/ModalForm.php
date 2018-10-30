@@ -4,10 +4,11 @@ namespace xenialdan\customui\windows;
 
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
-use xenialdan\customui\elements\Button;
+use pocketmine\Server;
+use pocketmine\utils\TextFormat;
 use xenialdan\customui\elements\UIElement;
 
-class SimpleForm implements CustomUI
+class ModalForm implements CustomUI
 {
     use CallableTrait;
 
@@ -15,45 +16,38 @@ class SimpleForm implements CustomUI
     protected $title = '';
     /** @var string */
     protected $content = '';
-    /** @var Button[] */
-    protected $buttons = [];
+    /** @var string */
+    protected $trueButtonText = '';
+    /** @var string */
+    protected $falseButtonText = '';
     /** @var int */
     private $id;
 
     /**
-     * SimpleForm only consists of clickable buttons
+     * This is a window to show a simple text to the player
      *
      * @param string $title
      * @param string $content
+     * @param string $trueButtonText
+     * @param string $falseButtonText
      */
-    public function __construct($title, $content = '')
+    public function __construct($title, $content, $trueButtonText, $falseButtonText)
     {
         $this->title = $title;
         $this->content = $content;
-    }
-
-    /**
-     * Add button to form
-     *
-     * @param Button $button
-     */
-    public function addButton(Button $button)
-    {
-        $this->buttons[] = $button;
+        $this->trueButtonText = $trueButtonText;
+        $this->falseButtonText = $falseButtonText;
     }
 
     final public function jsonSerialize()
     {
-        $data = [
-            'type' => 'form',
+        return [
+            'type' => 'modal',
             'title' => $this->title,
             'content' => $this->content,
-            'buttons' => []
+            'button1' => $this->trueButtonText,
+            'button2' => $this->falseButtonText,
         ];
-        foreach ($this->buttons as $button) {
-            $data['buttons'][] = $button;
-        }
-        return $data;
     }
 
     final public function getTitle()
@@ -63,7 +57,7 @@ class SimpleForm implements CustomUI
 
     public function getContent(): array
     {
-        return [$this->content, $this->buttons];
+        return [$this->content, $this->trueButtonText, $this->falseButtonText];
     }
 
     public function setID(int $id)
@@ -78,17 +72,20 @@ class SimpleForm implements CustomUI
 
     /**
      * @param int $index
-     * @return Button
+     * @return UIElement|null
      */
-    public function getElement(int $index): Button
+    public function getElement(int $index)
     {
-        return $this->buttons[$index];
+        return null;
     }
 
     public function setElement(UIElement $element, int $index)
     {
-        if (!$element instanceof Button) return;
-        $this->buttons[$index] = $element;
+    }
+
+    public function setCallableClose($callableClose = null): void
+    {
+        Server::getInstance()->getLogger()->debug("[" . __METHOD__ . "] " . TextFormat::RED . "Due to a client bug modal forms send false when closed, so this function will never be called!");
     }
 
     /**
@@ -101,20 +98,9 @@ class SimpleForm implements CustomUI
      */
     public function handleResponse(Player $player, $data): void
     {
-        if (!is_numeric($data)) {
-            $this->close($player);
-            return;
-        }
-        $return = "";
-        if (isset($this->buttons[$data])) {
-            if (!is_null($value = $this->buttons[$data]->handle($data, $player))) $return = $value;
-        } else {
-            error_log(__CLASS__ . '::' . __METHOD__ . " Button with index {$data} doesn't exists.");
-        }
-
         $callable = $this->getCallable();
         if ($callable !== null) {
-            $callable($player, $return);
+            $callable($player, boolval($data));
         }
     }
 }

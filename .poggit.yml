@@ -7,6 +7,6 @@ projects:
   customuitest:
     path: examples/customuitest
     libs:
-      - src: /customui
-        version: "^2.0.0"
+    - src: /customui
+      version: "^2.0.0"
 ...

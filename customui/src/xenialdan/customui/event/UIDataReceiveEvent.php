@@ -26,19 +26,23 @@ use pocketmine\network\mcpe\protocol\DataPacket;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 
-class UIDataReceiveEvent extends UIEvent{
+class UIDataReceiveEvent extends UIEvent
+{
 
-	public static $handlerList = null;
+    public static $handlerList = null;
 
-	public function __construct(Plugin $plugin, DataPacket $packet, Player $player){
-		parent::__construct($plugin, $packet, $player);
-	}
+    public function __construct(Plugin $plugin, DataPacket $packet, Player $player)
+    {
+        parent::__construct($plugin, $packet, $player);
+    }
 
-	public function getData(){
-		return json_decode($this->packet->formData);
-	}
+    public function getData()
+    {
+        return json_decode($this->packet->formData);
+    }
 
-	public function getDataEncoded(){
-		return $this->packet->formData;
-	}
+    public function getDataEncoded()
+    {
+        return $this->packet->formData;
+    }
 }
