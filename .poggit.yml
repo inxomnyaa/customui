@@ -7,6 +7,6 @@ projects:
   customuitest:
     path: examples/customuitest
     libs:
-    - src: thebigsmilexd//customui
+    - src: thebigsmilexd/customui/customui
       version: "^3.0.0"
 ...
