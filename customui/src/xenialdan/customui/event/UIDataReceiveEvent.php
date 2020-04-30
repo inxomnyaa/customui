@@ -22,23 +22,14 @@
 namespace xenialdan\customui\event;
 
 
-use pocketmine\network\mcpe\protocol\DataPacket;
-use pocketmine\Player;
-use pocketmine\plugin\Plugin;
-
 class UIDataReceiveEvent extends UIEvent
 {
 
-    public static $handlerList = null;
+    public static $handlerList;
 
-    public function __construct(Plugin $plugin, DataPacket $packet, Player $player)
+    public function getData(): array
     {
-        parent::__construct($plugin, $packet, $player);
-    }
-
-    public function getData()
-    {
-        return json_decode($this->packet->formData);
+        return json_decode($this->packet->formData, true, 512, JSON_THROW_ON_ERROR);
     }
 
     public function getDataEncoded()

@@ -2,33 +2,32 @@
 
 namespace xenialdan\customui\elements;
 
-use Exception;
+use InvalidArgumentException;
 use pocketmine\Player;
 
 class Slider extends UIElement
 {
 
     /** @var float */
-    protected $min = 0;
+    protected $min = 0.0;
     /** @var float */
-    protected $max = 0;
+    protected $max = 0.0;
     /** @var float Only positive numbers */
-    protected $step = 0;
+    protected $step = 0.0;
     /** @var float */
-    protected $defaultValue = 0;
+    protected $defaultValue = 0.0;
 
     /**
-     *
      * @param string $text
      * @param float $min
      * @param float $max
      * @param float $step
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
-    public function __construct($text, $min, $max, $step = 0.0)
+    public function __construct(string $text, float $min, float $max, float $step = 0.0)
     {
         if ($min > $max) {
-            throw new \Exception(__METHOD__ . ' Borders are messed up');
+            throw new InvalidArgumentException(__METHOD__ . ' Borders are messed up');
         }
         $this->text = $text;
         $this->min = $min;
@@ -40,46 +39,41 @@ class Slider extends UIElement
     /**
      *
      * @param float $step
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
-    public function setStep($step)
+    public function setStep(float $step): void
     {
         if ($step < 0) {
-            throw new \Exception(__METHOD__ . ' Step should be positive');
+            throw new InvalidArgumentException(__METHOD__ . ' Step should be positive');
         }
         $this->step = $step;
     }
 
     /**
-     *
      * @param float $value
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
-    public function setDefaultValue($value)
+    public function setDefaultValue(float $value): void
     {
         if ($value < $this->min || $value > $this->max) {
-            throw new \Exception(__METHOD__ . ' Default value out of borders');
+            throw new InvalidArgumentException(__METHOD__ . ' Default value out of borders');
         }
         $this->defaultValue = $value;
     }
 
-    /**
-     *
-     * @return array
-     */
-    final public function jsonSerialize()
+    final public function jsonSerialize(): array
     {
         $data = [
-            "type" => "slider",
-            "text" => $this->text,
-            "min" => $this->min,
-            "max" => $this->max
+            'type' => 'slider',
+            'text' => $this->text,
+            'min' => $this->min,
+            'max' => $this->max
         ];
         if ($this->step > 0) {
-            $data["step"] = $this->step;
+            $data['step'] = $this->step;
         }
-        if ($this->defaultValue != $this->min) {
-            $data["default"] = $this->defaultValue;
+        if ($this->defaultValue !== $this->min) {
+            $data['default'] = $this->defaultValue;
         }
         return $data;
     }
@@ -89,7 +83,7 @@ class Slider extends UIElement
      *
      * @param null $value
      * @param Player $player
-     * @return mixed
+     * @return float
      */
     public function handle($value, Player $player)
     {

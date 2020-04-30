@@ -2,8 +2,10 @@
 
 namespace xenialdan\customui\windows;
 
+use Exception;
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
+use xenialdan\customui\ButtonImage;
 use xenialdan\customui\elements\Button;
 use xenialdan\customui\elements\UIElement;
 
@@ -37,8 +39,23 @@ class SimpleForm implements CustomUI
      *
      * @param Button $button
      */
-    public function addButton(Button $button)
+    public function addButton(Button $button): void
     {
+        $this->buttons[] = $button;
+    }
+
+    /**
+     * Add button to form
+     *
+     * @param string $text
+     * @param ButtonImage|null $image
+     * @throws Exception
+     */
+    public function addButtonEasy(string $text, ?ButtonImage $image = null): void//TODO rename or remove
+    {
+        $button = new Button($text);
+        if ($image !== null)
+            $button->addImage($image->getType(), $image->getData());
         $this->buttons[] = $button;
     }
 
@@ -56,7 +73,7 @@ class SimpleForm implements CustomUI
         return $data;
     }
 
-    final public function getTitle()
+    final public function getTitle(): string
     {
         return $this->title;
     }
@@ -66,7 +83,7 @@ class SimpleForm implements CustomUI
         return [$this->content, $this->buttons];
     }
 
-    public function setID(int $id)
+    public function setID(int $id): void
     {
         $this->id = $id;
     }
@@ -80,12 +97,12 @@ class SimpleForm implements CustomUI
      * @param int $index
      * @return Button
      */
-    public function getElement(int $index): Button
+    public function getElement(int $index): ?UIElement
     {
         return $this->buttons[$index];
     }
 
-    public function setElement(UIElement $element, int $index)
+    public function setElement(UIElement $element, int $index): void
     {
         if (!$element instanceof Button) return;
         $this->buttons[$index] = $element;
@@ -101,15 +118,18 @@ class SimpleForm implements CustomUI
      */
     public function handleResponse(Player $player, $data): void
     {
-        if (!is_numeric($data)) {
+        if ($data === null) {
             $this->close($player);
             return;
-        }
-        $return = "";
-        if (isset($this->buttons[$data])) {
-            if (!is_null($value = $this->buttons[$data]->handle($data, $player))) $return = $value;
+        } else if (is_int($data)) {
+            $return = '';
+            if (isset($this->buttons[$data])) {
+                if (($value = $this->buttons[$data]->handle($data, $player)) !== null) $return = $value;
+            } else {
+                throw new FormValidationException("Option $data does not exist");
+            }
         } else {
-            error_log(__CLASS__ . '::' . __METHOD__ . " Button with index {$data} doesn't exists.");
+            throw new FormValidationException('Expected int or null, got ' . gettype($data));
         }
 
         $callable = $this->getCallable();

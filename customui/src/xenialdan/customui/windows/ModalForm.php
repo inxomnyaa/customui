@@ -6,6 +6,7 @@ use pocketmine\form\FormValidationException;
 use pocketmine\Player;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
+use RuntimeException;
 use xenialdan\customui\elements\UIElement;
 
 class ModalForm implements CustomUI
@@ -50,7 +51,7 @@ class ModalForm implements CustomUI
         ];
     }
 
-    final public function getTitle()
+    final public function getTitle(): string
     {
         return $this->title;
     }
@@ -60,7 +61,7 @@ class ModalForm implements CustomUI
         return [$this->content, $this->trueButtonText, $this->falseButtonText];
     }
 
-    public function setID(int $id)
+    public function setID(int $id): void
     {
         $this->id = $id;
     }
@@ -74,18 +75,23 @@ class ModalForm implements CustomUI
      * @param int $index
      * @return UIElement|null
      */
-    public function getElement(int $index)
+    public function getElement(int $index): ?UIElement
     {
         return null;
     }
 
-    public function setElement(UIElement $element, int $index)
+    public function setElement(UIElement $element, int $index): void
     {
     }
 
+    /**
+     * @noinspection PhpUnusedParameterInspection
+     * @param null $callableClose
+     * @throws RuntimeException
+     */
     public function setCallableClose($callableClose = null): void
     {
-        Server::getInstance()->getLogger()->debug("[" . __METHOD__ . "] " . TextFormat::RED . "Due to a client bug modal forms send false when closed, so this function will never be called!");
+        Server::getInstance()->getLogger()->debug('[' . __METHOD__ . '] ' . TextFormat::RED . 'Due to a client bug modal forms send false when closed, so this function will never be called!');
     }
 
     /**
@@ -98,9 +104,12 @@ class ModalForm implements CustomUI
      */
     public function handleResponse(Player $player, $data): void
     {
+        if (!is_bool($data)) {
+            throw new FormValidationException('Expected bool, got ' . gettype($data));
+        }
         $callable = $this->getCallable();
         if ($callable !== null) {
-            $callable($player, boolval($data));
+            $callable($player, (bool)$data);
         }
     }
 }

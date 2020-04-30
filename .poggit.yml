@@ -8,5 +8,5 @@ projects:
     path: examples/customuitest
     libs:
     - src: thebigsmilexd/customui/customui
-      version: "^3.0.0"
+      version: "3.0.0"
 ...

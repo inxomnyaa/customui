@@ -9,26 +9,20 @@ class Dropdown extends UIElement
 
     /** @var string[] */
     protected $options = [];
-    /** @var integer */
+    /** @var int */
     protected $defaultOptionIndex = 0;
 
     /**
-     *
      * @param string $text
      * @param string[] $options
      */
-    public function __construct($text, $options = [])
+    public function __construct(string $text, array $options = [])
     {
         $this->text = $text;
         $this->options = $options;
     }
 
-    /**
-     *
-     * @param string $optionText
-     * @param boolean $isDefault
-     */
-    public function addOption($optionText, $isDefault = false)
+    public function addOption(string $optionText, bool $isDefault = false): void
     {
         if ($isDefault) {
             $this->defaultOptionIndex = count($this->options);
@@ -36,14 +30,9 @@ class Dropdown extends UIElement
         $this->options[] = $optionText;
     }
 
-    /**
-     *
-     * @param string $optionText
-     * @return boolean
-     */
-    public function setOptionAsDefault($optionText)
+    public function setOptionAsDefault(string $optionText): bool
     {
-        $index = array_search($optionText, $this->options);
+        $index = array_search($optionText, $this->options, true);
         if ($index === false) {
             return false;
         }
@@ -52,20 +41,16 @@ class Dropdown extends UIElement
     }
 
     /**
-     * Replace all options
+     * Replaces all options
      *
      * @param string[] $options
      */
-    public function setOptions($options)
+    public function setOptions(array $options): void
     {
         $this->options = $options;
     }
 
-    /**
-     *
-     * @return array
-     */
-    final public function jsonSerialize()
+    final public function jsonSerialize(): array
     {
         return [
             'type' => 'dropdown',
@@ -77,10 +62,11 @@ class Dropdown extends UIElement
 
     /**
      * Returns the value of the selected option
+     * TODO options to get either text or index
      *
      * @param null $value
      * @param Player $player
-     * @return mixed
+     * @return string
      */
     public function handle($value, Player $player)
     {

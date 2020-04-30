@@ -7,7 +7,7 @@ use pocketmine\Player;
 class Input extends UIElement
 {
 
-    /** @var string Text displaying in input without text */
+    /** @var string Placeholder text that shows when input is empty */
     protected $placeholder = '';
     /** @var string Default text for input */
     protected $defaultText = '';
@@ -18,31 +18,27 @@ class Input extends UIElement
      * @param string $placeholder
      * @param string $defaultText
      */
-    public function __construct($text, $placeholder, $defaultText = '')
+    public function __construct(string $text, string $placeholder = '', string $defaultText = '')
     {
         $this->text = $text;
         $this->placeholder = $placeholder;
         $this->defaultText = $defaultText;
     }
 
-    /**
-     *
-     * @return array
-     */
-    final public function jsonSerialize()
+    final public function jsonSerialize(): array
     {
         return [
-            "type" => "input",
-            "text" => $this->text,
-            "placeholder" => $this->placeholder,
-            "default" => $this->defaultText
+            'type' => 'input',
+            'text' => $this->text,
+            'placeholder' => $this->placeholder,
+            'default' => $this->defaultText
         ];
     }
 
     /**
      * @param null $value
      * @param Player $player
-     * @return mixed
+     * @return string
      */
     public function handle($value, Player $player)
     {

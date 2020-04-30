@@ -2,19 +2,16 @@
 
 namespace xenialdan\customui\elements;
 
+use JsonSerializable;
 use pocketmine\Player;
 
-abstract class UIElement implements \JsonSerializable
+abstract class UIElement implements JsonSerializable
 {
 
+    /** @var string */
     protected $text = '';
 
-    /**
-     * Returns an array of item stack properties that can be serialized to json.
-     *
-     * @return array
-     */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [];
     }

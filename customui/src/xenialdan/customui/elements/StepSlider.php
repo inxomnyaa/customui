@@ -9,7 +9,7 @@ class StepSlider extends UIElement
 
     /** @var string[] */
     protected $steps = [];
-    /** @var integer Step index */
+    /** @var int Step index */
     protected $defaultStepIndex = 0;
 
     /**
@@ -17,33 +17,23 @@ class StepSlider extends UIElement
      * @param string $text
      * @param string[] $steps
      */
-    public function __construct($text, $steps = [])
+    public function __construct(string $text, array $steps = [])
     {
         $this->text = $text;
         $this->steps = $steps;
     }
 
-    /**
-     *
-     * @param string $stepText
-     * @param boolean $isDefault
-     */
-    public function addStep($stepText, $isDefault = false)
+    public function addStep(string $stepText, $setAsDefault = false): void
     {
-        if ($isDefault) {
+        if ($setAsDefault) {
             $this->defaultStepIndex = count($this->steps);
         }
         $this->steps[] = $stepText;
     }
 
-    /**
-     *
-     * @param string $stepText
-     * @return boolean
-     */
-    public function setStepAsDefault($stepText)
+    public function setStepAsDefault(string $stepText): bool
     {
-        $index = array_search($stepText, $this->steps);
+        $index = array_search($stepText, $this->steps, true);
         if ($index === false) {
             return false;
         }
@@ -52,20 +42,16 @@ class StepSlider extends UIElement
     }
 
     /**
-     * Replace all steps
+     * Replaces all steps
      *
      * @param string[] $steps
      */
-    public function setSteps($steps)
+    public function setSteps(array $steps): void
     {
         $this->steps = $steps;
     }
 
-    /**
-     *
-     * @return array
-     */
-    final public function jsonSerialize()
+    final public function jsonSerialize(): array
     {
         return [
             'type' => 'step_slider',
@@ -76,6 +62,7 @@ class StepSlider extends UIElement
     }
 
     /**
+     * TODO options to get either text or index or value
      * @param null $value
      * @param Player $player
      * @return mixed

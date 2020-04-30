@@ -14,10 +14,10 @@ class ServerForm extends CustomForm
             'title' => $this->title,
             'content' => []
         ];
-        if ($this->iconURL != '') {
+        if ($this->iconURL !== '') {
             $data['icon'] = [
-                "type" => "url",
-                "data" => $this->iconURL
+                'type' => 'url',
+                'data' => $this->iconURL
             ];
         }
         foreach ($this->elements as $element) {

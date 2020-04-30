@@ -4,7 +4,6 @@ namespace xenialdan\customui\windows;
 
 use pocketmine\form\Form;
 use pocketmine\Player;
-use xenialdan\customui\elements\Button;
 use xenialdan\customui\elements\UIElement;
 
 interface CustomUI extends Form
@@ -14,21 +13,27 @@ interface CustomUI extends Form
      * To handle manual closing
      * @param Player $player
      */
-    public function close(Player $player);
+    public function close(Player $player): void;
 
-    public function getTitle();
+    public function getTitle(): string;
 
     public function getContent(): array;
 
     /**
      * @param int $index
-     * @return UIElement|Button|null
+     * @return UIElement|null
+     * @deprecated
      */
-    public function getElement(int $index);
+    public function getElement(int $index): ?UIElement;
 
-    public function setElement(UIElement $element, int $index);
+    /**
+     * @param UIElement $element
+     * @param int $index
+     * @deprecated
+     */
+    public function setElement(UIElement $element, int $index): void;
 
-    public function setID(int $id);
+    public function setID(int $id): void;
 
     public function getID(): int;
 

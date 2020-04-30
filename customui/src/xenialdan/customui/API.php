@@ -2,6 +2,7 @@
 
 namespace xenialdan\customui;
 
+use InvalidArgumentException;
 use pocketmine\OfflinePlayer;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
@@ -17,16 +18,15 @@ class API
      * @param CustomUI $ui
      * @return int id
      */
-    public static function addUI(Plugin $plugin, CustomUI &$ui)
+    public static function addUI(Plugin $plugin, CustomUI $ui): int
     {
         $ui->setID(count(self::$UIs[$plugin->getName()] ?? []));
         $id = $ui->getID();
         self::$UIs[$plugin->getName()][$id] = $ui;
-        $ui = null;
         return $id;
     }
 
-    public static function resetUIs(Plugin $plugin)
+    public static function resetUIs(Plugin $plugin): void
     {
         self::$UIs[$plugin->getName()] = [];
     }
@@ -58,19 +58,29 @@ class API
         return self::$UIs[$plugin->getName()][$id];
     }
 
-    public static function handle(Plugin $plugin, int $id, $response, Player $player)
+    public static function handle(Plugin $plugin, int $id, $response, Player $player): string
     {
         $ui = self::getPluginUIs($plugin)[$id];
-        var_dump($ui);
-        return $ui->handle($response, $player) ?? "";
+        return $ui->handle($response, $player) ?? '';
     }
 
-    public static function showUI(CustomUI $ui, Player $player)
+    /**
+     * @param CustomUI $ui
+     * @param Player $player
+     * @throws InvalidArgumentException
+     */
+    public static function showUI(CustomUI $ui, Player $player): void
     {
         $player->sendForm($ui);
     }
 
-    public static function showUIbyID(Plugin $plugin, int $id, Player $player)
+    /**
+     * @param Plugin $plugin
+     * @param int $id
+     * @param Player $player
+     * @throws InvalidArgumentException
+     */
+    public static function showUIbyID(Plugin $plugin, int $id, Player $player): void
     {
         $ui = self::getPluginUIs($plugin)[$id];
         $player->sendForm($ui);
@@ -82,7 +92,7 @@ class API
      */
     public static function playerArrayToNameArray(array $players): array
     {
-        $return = array_map(function ($player) {
+        $return = array_map(static function ($player) {
             /** @var OfflinePlayer|Player $player */
             return $player->getName();
         }, $players);

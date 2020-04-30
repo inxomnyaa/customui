@@ -11,7 +11,7 @@ use pocketmine\plugin\Plugin;
 abstract class UIEvent extends PluginEvent
 {
 
-    public static $handlerList = null;
+    public static $handlerList;
 
     /** @var DataPacket|ModalFormResponsePacket $packet */
     protected $packet;

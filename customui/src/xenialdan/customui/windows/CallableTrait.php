@@ -49,7 +49,7 @@ trait CallableTrait
      * To handle manual closing
      * @param Player $player
      */
-    final public function close(Player $player)
+    final public function close(Player $player): void
     {
         $callable = $this->getCallableClose();
         if ($callable !== null) {

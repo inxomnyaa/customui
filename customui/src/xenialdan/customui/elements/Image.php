@@ -4,9 +4,13 @@ namespace xenialdan\customui\elements;
 
 use pocketmine\Player;
 
+/**
+ * @internal
+ * @deprecated
+ */
 class Image extends UIElement
 {
-//TODO! Blame mojang, doesn't work yet
+//TODO! Blame Mojang, doesn't work yet
     public $texture;
     public $width;
     public $height;
@@ -22,13 +26,13 @@ class Image extends UIElement
      *
      * @return array
      */
-    final public function jsonSerialize()
+    final public function jsonSerialize(): array
     {
         return [
-            "text" => "sign",
-            "type" => "image",
-            "texture" => $this->texture,
-            "size" => [$this->width, $this->height]
+            'text' => 'sign',
+            'type' => 'image',
+            'texture' => $this->texture,
+            'size' => [$this->width, $this->height]
         ];
     }
 
