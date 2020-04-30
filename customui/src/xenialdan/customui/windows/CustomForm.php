@@ -2,10 +2,15 @@
 
 namespace xenialdan\customui\windows;
 
+use InvalidArgumentException;
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
 use xenialdan\customui\elements\Button;
+use xenialdan\customui\elements\Dropdown;
+use xenialdan\customui\elements\Input;
 use xenialdan\customui\elements\Label;
+use xenialdan\customui\elements\Slider;
+use xenialdan\customui\elements\StepSlider;
 use xenialdan\customui\elements\Toggle;
 use xenialdan\customui\elements\UIElement;
 
@@ -119,6 +124,43 @@ class CustomForm implements CustomUI
     public function addToggle(string $text, bool $value = false): self
     {
         $this->addElement(new Toggle($text, $value));
+        return $this;
+    }
+
+    public function addDropdown(string $text, array $options = []): self
+    {
+        $this->addElement(new Dropdown($text, $options));
+        return $this;
+    }
+
+    public function addInput(string $text, string $placeholder = '', string $defaultText = ''): self
+    {
+        $this->addElement(new Input($text, $placeholder, $defaultText));
+        return $this;
+    }
+
+    /**
+     * @param string $text
+     * @param float $min
+     * @param float $max
+     * @param float $step
+     * @return self
+     * @throws InvalidArgumentException
+     */
+    public function addSlider(string $text, float $min, float $max, float $step = 0.0): self
+    {
+        $this->addElement(new Slider($text, $min, $max, $step));
+        return $this;
+    }
+
+    /**
+     * @param string $text
+     * @param string[] $steps
+     * @return self
+     */
+    public function addStepSlider(string $text, array $steps = []): self
+    {
+        $this->addElement(new StepSlider($text, $steps));
         return $this;
     }
 }

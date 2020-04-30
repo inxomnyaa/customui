@@ -13,7 +13,6 @@ class StepSlider extends UIElement
     protected $defaultStepIndex = 0;
 
     /**
-     *
      * @param string $text
      * @param string[] $steps
      */
