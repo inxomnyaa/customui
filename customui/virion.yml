@@ -1,6 +1,6 @@
 name: customui
-version: 4.0.0-alpha1
+version: 4.0.0-alpha2
 antigen: xenialdan\customui
-api: ['3.0.0','4.0.0']
-php: [7.2]
+api: ['4.0.0']
+php: [7.4]
 author: XenialDan
