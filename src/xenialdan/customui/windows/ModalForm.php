@@ -3,7 +3,7 @@
 namespace xenialdan\customui\windows;
 
 use pocketmine\form\FormValidationException;
-use pocketmine\player\Player;
+use pocketmine\Player;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 use RuntimeException;

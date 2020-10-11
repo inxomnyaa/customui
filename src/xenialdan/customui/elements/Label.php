@@ -2,7 +2,7 @@
 
 namespace xenialdan\customui\elements;
 
-use pocketmine\player\Player;
+use pocketmine\Player;
 
 class Label extends UIElement
 {

@@ -4,7 +4,7 @@ namespace xenialdan\customui\windows;
 
 use Exception;
 use pocketmine\form\FormValidationException;
-use pocketmine\player\Player;
+use pocketmine\Player;
 use xenialdan\customui\ButtonImage;
 use xenialdan\customui\elements\Button;
 use xenialdan\customui\elements\UIElement;

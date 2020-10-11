@@ -3,7 +3,7 @@
 namespace xenialdan\customui\elements;
 
 use InvalidArgumentException;
-use pocketmine\player\Player;
+use pocketmine\Player;
 
 class Slider extends UIElement
 {

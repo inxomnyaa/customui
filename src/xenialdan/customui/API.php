@@ -3,8 +3,8 @@
 namespace xenialdan\customui;
 
 use InvalidArgumentException;
-use pocketmine\player\OfflinePlayer;
-use pocketmine\player\Player;
+use pocketmine\OfflinePlayer;
+use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 use xenialdan\customui\windows\CustomUI;
 

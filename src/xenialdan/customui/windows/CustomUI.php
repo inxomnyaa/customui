@@ -3,7 +3,7 @@
 namespace xenialdan\customui\windows;
 
 use pocketmine\form\Form;
-use pocketmine\player\Player;
+use pocketmine\Player;
 use xenialdan\customui\elements\UIElement;
 
 interface CustomUI extends Form
