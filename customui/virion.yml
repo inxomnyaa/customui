@@ -2,5 +2,5 @@ name: customui
 version: 4.0.0-alpha2
 antigen: xenialdan\customui
 api: ['4.0.0']
-php: [7.4]
+php: [7.3]
 author: XenialDan
